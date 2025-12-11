@@ -26,6 +26,7 @@ public class NotificacoesController {
         carregar();
     }
 
+    //CARREGAR
     private void carregar() {
         try {
             String userId = UserSession.getId();

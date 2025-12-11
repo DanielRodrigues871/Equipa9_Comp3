@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.ListarOfertasCoordenadorController"
+      spacing="15" alignment="CENTER" padding="20">
+
+    <Label text="Ofertas Criadas" style="-fx-font-size:20px;"/>
+
+    <TableView fx:id="tabela" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="colTitulo" text="Título" />
+            <TableColumn fx:id="colEstado" text="Estado" />
+            <TableColumn fx:id="colVagas" text="Vagas" />
+            <TableColumn fx:id="colDuracao" text="Duração" />
+        </columns>
+    </TableView>
+
+    <Button text="Editar Oferta Selecionada" onAction="#editarSelecionada"/>
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

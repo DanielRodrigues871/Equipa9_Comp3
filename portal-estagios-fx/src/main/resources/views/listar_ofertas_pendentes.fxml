@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.ListarOfertasPendentesController"
+      spacing="15" alignment="CENTER" padding="20">
+
+    <Label text="Ofertas Pendentes" style="-fx-font-size: 22px;"/>
+
+    <TableView fx:id="tabela" prefWidth="700">
+
+        <columns>
+            <TableColumn fx:id="colTitulo" text="Título"/>
+            <TableColumn fx:id="colEmpresa" text="Empresa"/>
+            <TableColumn fx:id="colVagas" text="Vagas"/>
+            <TableColumn fx:id="colDuracao" text="Duração"/>
+        </columns>
+
+    </TableView>
+
+    <HBox spacing="15">
+        <Button text="Aprovar" onAction="#aprovar"/>
+        <Button text="Rejeitar" onAction="#rejeitar"/>
+        <Button text="Voltar" onAction="#voltar"/>
+    </HBox>
+
+</VBox>

@@ -17,8 +17,9 @@ public class DashboardCoordenadorController {
 
     @FXML
     public void criarOferta() {
-        System.out.println("→ Abrir janela: Criar Oferta");
+        SceneManager.changeScene("criar_oferta_coordenador.fxml");
     }
+
 
     @FXML
     public void editarOferta() {
@@ -32,8 +33,9 @@ public class DashboardCoordenadorController {
 
     @FXML
     public void listarPendentes() {
-        System.out.println("→ GET /api/ofertas/status/PENDENTE");
+        SceneManager.changeScene("listar_ofertas_pendentes.fxml");
     }
+
 
     @FXML
     public void aprovarOferta() {

@@ -25,6 +25,7 @@ public class ConsultarOfertasController {
 
     private void carregarOfertas() {
         try {
+            // Vai buscar apenas ofertas aprovadas
             JSONArray arr = ApiClient.getArray("/api/ofertas/status/APROVADO");
 
             List<OfertaFX> lista = new ArrayList<>();
@@ -35,8 +36,9 @@ public class ConsultarOfertasController {
                 lista.add(new OfertaFX(
                         o.getString("id"),
                         o.getString("titulo"),
-                        o.getInt("duracaoMeses"),
-                        o.getInt("numeroVagas")
+                        o.getString("empresaNome"),        // <<< NOVO
+                        o.getInt("numeroVagas"),           // <<< NOVO
+                        o.getInt("duracaoMeses")           // <<< NOVO
                 ));
             }
 
@@ -46,6 +48,7 @@ public class ConsultarOfertasController {
             e.printStackTrace();
         }
     }
+
     
     
     @FXML

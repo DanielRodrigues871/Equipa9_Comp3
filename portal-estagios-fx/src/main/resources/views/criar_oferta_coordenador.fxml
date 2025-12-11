@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.CriarOfertaCoordenadorController"
+      spacing="12" alignment="CENTER" padding="20">
+
+    <Label text="Criar Oferta (Coordenador)" style="-fx-font-size:20px;"/>
+
+    <TextField fx:id="tituloField" promptText="Título da oferta"/>
+    <TextArea fx:id="descricaoArea" promptText="Descrição" prefHeight="80"/>
+    <TextArea fx:id="requisitosArea" promptText="Requisitos" prefHeight="80"/>
+    <TextField fx:id="localizacaoField" promptText="Localização"/>
+    <TextField fx:id="duracaoField" promptText="Duração em meses"/>
+    <TextField fx:id="vagasField" promptText="Número de vagas"/>
+
+    <Label fx:id="errorLabel" textFill="red"/>
+
+    <Button text="Criar Oferta" onAction="#criar"/>
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

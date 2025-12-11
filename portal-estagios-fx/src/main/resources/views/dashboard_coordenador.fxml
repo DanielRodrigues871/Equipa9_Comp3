@@ -27,6 +27,7 @@
     <Button text="Menu Empresas" onAction="#menuEmpresas"/>
     <Button text="Estatísticas" onAction="#verEstatisticas"/>
     <Button text="Notificações" onAction="#verNotificacoes"/>
+    <Button text="Editar Oferta" onAction="#listarParaEditar"/>
 
     <Button text="Logout" onAction="#logout"/>
 

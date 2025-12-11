@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.RegisterEstudanteController"
+      stylesheets="@../css/style.css"
+      >
+      
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Registo - Estudante" style="-fx-font-size: 20px;"/>
+
+    <Label fx:id="errorLabel" textFill="red"/>
+
+    <TextField fx:id="nomeField" promptText="Nome Completo"/>
+    <TextField fx:id="emailField" promptText="Email"/>
+    <PasswordField fx:id="passwordField" promptText="Password"/>
+
+    <TextField fx:id="cursoIdField" promptText="ID do Curso"/>
+    <TextField fx:id="numeroEstudanteField" promptText="Número de Estudante"/>
+    <TextField fx:id="anoMatriculaField" promptText="Ano Matrícula"/>
+
+    <Button text="Registar" onAction="#registar"/>
+    <Button text="Voltar" onAction="#voltar"/>
+</VBox>

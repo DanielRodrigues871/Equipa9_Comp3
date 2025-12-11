@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.NotificacoesController"
+      alignment="CENTER"
+      spacing="15"
+      padding="20">
+
+    <Label text="Notificações" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tabela" prefWidth="600">
+
+        <columns>
+            <TableColumn fx:id="colMensagem" text="Mensagem" prefWidth="400"/>
+            <TableColumn fx:id="colData" text="Data" prefWidth="200"/>
+        </columns>
+
+    </TableView>
+    
+    <Button text="Marcar Todas Como Lidas" onAction="#marcarTodas"/>
+
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

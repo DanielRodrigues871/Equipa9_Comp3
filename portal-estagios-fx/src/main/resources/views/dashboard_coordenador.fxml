@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.DashboardCoordenadorController"
+      alignment="CENTER"
+      spacing="12"
+      prefWidth="450"
+      prefHeight="500">
+
+    <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <Button text="Criar Oferta" onAction="#criarOferta"/>
+    <Button text="Editar Oferta" onAction="#editarOferta"/>
+    <Button text="Eliminar Oferta" onAction="#eliminarOferta"/>
+    <Button text="Ofertas Pendentes" onAction="#listarPendentes"/>
+    <Button text="Aprovar Oferta" onAction="#aprovarOferta"/>
+    <Button text="Rejeitar Oferta" onAction="#rejeitarOferta"/>
+    <Button text="Listar Todas as Ofertas" onAction="#listarTodas"/>
+    <Button text="Ver Candidaturas de uma Oferta" onAction="#verCandidaturas"/>
+    <Button text="Gerir Candidatura" onAction="#gerirCandidatura"/>
+    <Button text="Registar Curso" onAction="#registarCurso"/>
+    <Button text="Listar Estudantes de um Curso" onAction="#listarEstudantesCurso"/>
+    <Button text="Menu Empresas" onAction="#menuEmpresas"/>
+    <Button text="Estatísticas" onAction="#verEstatisticas"/>
+    <Button text="Notificações" onAction="#verNotificacoes"/>
+
+    <Button text="Logout" onAction="#logout"/>
+
+</VBox>

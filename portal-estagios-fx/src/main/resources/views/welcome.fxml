@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.WelcomeController"
+      alignment="CENTER"
+      spacing="20"
+      stylesheets="@../css/style.css"
+      prefWidth="300"
+      prefHeight="200">
+
+    <Label text="Portal de Estágios" style="-fx-font-size: 22px;"/>
+
+    <Button text="Login" onAction="#goToLogin" style="-fx-font-size: 14px;"/>
+    <Button text="Registar" onAction="#goToRegister" style="-fx-font-size: 14px;"/>
+
+</VBox>

@@ -12,13 +12,13 @@
     <Label text="Notificações" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
     <TableView fx:id="tabela" prefWidth="600">
+    <columns>
+        <TableColumn fx:id="colMensagem" text="Mensagem" prefWidth="350" />
+        <TableColumn fx:id="colLida" text="Lida" prefWidth="100" />
+        <TableColumn fx:id="colData" text="Data" prefWidth="150" />
+    </columns>
+</TableView>
 
-        <columns>
-            <TableColumn fx:id="colMensagem" text="Mensagem" prefWidth="400"/>
-            <TableColumn fx:id="colData" text="Data" prefWidth="200"/>
-        </columns>
-
-    </TableView>
     
     <Button text="Marcar Todas Como Lidas" onAction="#marcarTodas"/>
 

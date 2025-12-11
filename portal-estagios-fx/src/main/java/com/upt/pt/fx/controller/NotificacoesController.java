@@ -16,12 +16,14 @@ public class NotificacoesController {
 
     @FXML private TableView<NotificationFX> tabela;
     @FXML private TableColumn<NotificationFX, String> colMensagem;
+    @FXML private TableColumn<NotificationFX, String> colData;
     @FXML private TableColumn<NotificationFX, Boolean> colLida;
 
     @FXML
     public void initialize() {
         colMensagem.setCellValueFactory(new PropertyValueFactory<>("mensagem"));
         colLida.setCellValueFactory(new PropertyValueFactory<>("lida"));
+        colData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
         carregar();
     }
@@ -41,7 +43,8 @@ public class NotificacoesController {
                 lista.add(new NotificationFX(
                         n.getString("id"),
                         n.getString("mensagem"),
-                        n.getBoolean("lida")
+                        n.getBoolean("lida"),
+                        n.getString("data")
                 ));
             }
 
@@ -51,7 +54,6 @@ public class NotificacoesController {
             e.printStackTrace();
         }
     }
-
     @FXML
     public void marcarTodas() {
         try {

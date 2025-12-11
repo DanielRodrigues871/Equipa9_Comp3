@@ -28,6 +28,7 @@
     <Button text="Estatísticas" onAction="#verEstatisticas"/>
     <Button text="Notificações" onAction="#verNotificacoes"/>
     <Button text="Editar Oferta" onAction="#listarParaEditar"/>
+    <Button text="Listar Cursos" onAction="#listarCursos"/>
 
     <Button text="Logout" onAction="#logout"/>
 

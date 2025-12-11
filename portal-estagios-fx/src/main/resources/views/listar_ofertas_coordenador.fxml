@@ -18,6 +18,8 @@
         </columns>
     </TableView>
 
+    <Button text="Eliminar Oferta" onAction="#eliminar"/>
+
     <Button text="Editar Oferta Selecionada" onAction="#editarSelecionada"/>
     <Button text="Voltar" onAction="#voltar"/>
 

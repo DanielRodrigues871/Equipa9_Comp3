@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.ListarEstudantesController"
+      spacing="15" alignment="CENTER" padding="20">
+
+    <Label fx:id="tituloLabel" text="Estudantes" style="-fx-font-size: 22px;"/>
+
+    <TableView fx:id="tabela" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="250"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="250"/>
+            <TableColumn fx:id="colNumero" text="Número Aluno" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

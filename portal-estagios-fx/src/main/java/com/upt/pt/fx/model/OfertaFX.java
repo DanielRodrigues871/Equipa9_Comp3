@@ -10,7 +10,6 @@ public class OfertaFX {
 
     private String id;
     private String titulo;
-    // opcional
     private String estado;
  
     private int duracaoMeses;

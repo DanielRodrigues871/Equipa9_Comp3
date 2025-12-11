@@ -68,6 +68,28 @@ public class ListarOfertasCoordenadorController {
 
         SceneManager.changeScene("editar_oferta.fxml");
     }
+    
+    @FXML
+    public void eliminar() {
+        OfertaFX sel = tabela.getSelectionModel().getSelectedItem();
+        if (sel == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Tem a certeza?");
+        alert.setContentText("A oferta será arquivada, mas o histórico será mantido.");
+        
+        if (alert.showAndWait().get() != ButtonType.OK) {
+            return;
+        }
+
+        try {
+            ApiClient.post("/api/ofertas/" + sel.getId() + "/arquivar", new JSONObject());
+            carregar(); // atualizar lista
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     public void voltar() {

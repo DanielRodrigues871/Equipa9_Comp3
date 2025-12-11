@@ -64,13 +64,15 @@ public class DashboardCoordenadorController {
 
     @FXML
     public void registarCurso() {
-        System.out.println("→ POST /api/cursos");
+        SceneManager.changeScene("registar_curso.fxml");
     }
 
+
     @FXML
-    public void listarEstudantesCurso() {
-        System.out.println("→ GET /api/estudantes/curso/{idCurso}");
+    public void listarCursos() {
+        SceneManager.changeScene("listar_cursos.fxml");
     }
+
 
     @FXML
     public void menuEmpresas() {

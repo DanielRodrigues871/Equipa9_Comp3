@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.ListarCandidaturasController"
+      spacing="15" alignment="CENTER" padding="20">
+
+    <Label text="Candidaturas da Oferta" style="-fx-font-size:20px;"/>
+
+    <TableView fx:id="tabela" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="colNome" text="Estudante" prefWidth="250"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="150"/>
+            <TableColumn fx:id="colData" text="Data" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="15">
+        <Button text="Ver Detalhes" onAction="#verDetalhes"/>
+        <Button text="Aprovar" onAction="#aprovar"/>
+        <Button text="Rejeitar" onAction="#rejeitar"/>
+        <Button text="Voltar" onAction="#voltar"/>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.RegistarCursoController"
+      spacing="12" alignment="CENTER" padding="20">
+
+    <Label text="Registar Curso"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="nomeField" promptText="Nome do curso"/>
+    <TextField fx:id="siglaField" promptText="Sigla"/>
+    <TextField fx:id="areaField" promptText="Área"/>
+    <TextField fx:id="duracaoField" promptText="Duração (anos)"/>
+
+    <Label fx:id="errorLabel" textFill="red"/>
+
+    <Button text="Registar" onAction="#registar"/>
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

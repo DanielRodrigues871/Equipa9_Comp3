@@ -61,6 +61,12 @@ public class LoginController {
             errorLabel.setText("Credenciais inválidas!");
         }
     }   
+    
+    @FXML
+    public void voltar() {
+        SceneManager.changeScene("welcome.fxml");
+    }
+
 
     @FXML
     public void goToRegister() {

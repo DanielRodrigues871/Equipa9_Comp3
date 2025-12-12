@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.EstatisticasFXController"
-      spacing="10" alignment="TOP_LEFT" padding="20">
+      fx:controller="com.upt.pt.fx.controller.EstatisticasController"
+      spacing="20" alignment="TOP_CENTER" padding="20">
 
-    <Label text="Estatísticas do Portal" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <Label text="Estatísticas do Portal"
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
 
-    <Separator/>
+    <!-- SECÇÃO: Percentagens -->
+    <VBox spacing="6" prefWidth="500">
+        <Label text="Resumo Geral:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-    <Label text="Propostas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-    <Label fx:id="propostasAprovadas" />
-    <Label fx:id="propostasPendentes" />
-    <Label fx:id="propostasRejeitadas" />
+        <Label fx:id="lblPercentAprovadas"/>
+        <Label fx:id="lblPercentPendentes"/>
+        <Label fx:id="lblPercentRejeitadas"/>
+        <Label fx:id="lblTotalSemCandidaturas"/>
+    </VBox>
 
-    <Separator/>
+    <!-- SECÇÃO: Cursos Mais Procurados -->
+    <VBox spacing="6" prefWidth="500">
+        <Label text="Cursos Mais Procurados:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <ListView fx:id="listaCursos" prefHeight="120"/>
+    </VBox>
 
-    <Label text="Estágios sem candidaturas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-    <Label fx:id="estagiosSemCandidaturas" />
+    <!-- SECÇÃO: Empresas Mais Procuradas -->
+    <VBox spacing="6" prefWidth="500">
+        <Label text="Empresas Mais Procuradas:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <ListView fx:id="listaEmpresasMais" prefHeight="120"/>
+    </VBox>
 
-    <Separator/>
-
-    <Label text="Cursos mais procurados:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-    <ListView fx:id="listCursos" prefHeight="120"/>
-
-    <Separator/>
-
-    <Label text="Empresas mais procuradas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-    <ListView fx:id="listEmpresasMais" prefHeight="120"/>
-
-    <Separator/>
-
-    <Label text="Empresas menos procuradas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-    <ListView fx:id="listEmpresasMenos" prefHeight="120"/>
-
-    <Separator/>
+    <!-- SECÇÃO: Empresas Menos Escolhidas -->
+    <VBox spacing="6" prefWidth="500">
+        <Label text="Empresas Menos Escolhidas:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <ListView fx:id="listaEmpresasMenos" prefHeight="120"/>
+    </VBox>
 
     <Button text="Voltar" onAction="#voltar"/>
+
 </VBox>

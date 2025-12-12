@@ -1,72 +1,56 @@
 package com.upt.pt.fx.controller;
 
 import com.upt.pt.SceneManager;
-import com.upt.pt.fx.service.ApiClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class EstatisticasController {
 
-    @FXML private Label propostasAprovadas;
-    @FXML private Label propostasPendentes;
-    @FXML private Label propostasRejeitadas;
-    @FXML private Label estagiosSemCandidaturas;
+    @FXML private Label lblPercentAprovadas;
+    @FXML private Label lblPercentPendentes;
+    @FXML private Label lblPercentRejeitadas;
+    @FXML private Label lblTotalSemCandidaturas;
 
-    @FXML private ListView<String> listCursos;
-    @FXML private ListView<String> listEmpresasMais;
-    @FXML private ListView<String> listEmpresasMenos;
+    @FXML private ListView<String> listaCursos;
+    @FXML private ListView<String> listaEmpresasMais;
+    @FXML private ListView<String> listaEmpresasMenos;
 
     @FXML
     public void initialize() {
-        carregar();
+        carregarFake(); // será substituído pelo carregarReal();
     }
 
-    private void carregar() {
-        try {
-            JSONObject obj = ApiClient.getObject("/api/estatisticas");
+    /** FUTURO: carregar estatísticas reais via API */
+    private void carregarReal() {
+        // JSONObject obj = ApiClient.getObject("/api/estatisticas");
+        // preencher labels e listas com obj.get(...)
+    }
 
-            JSONObject propostas = obj.getJSONObject("propostas");
-            propostasAprovadas.setText("Aprovadas: " + propostas.getLong("aprovadas"));
-            propostasPendentes.setText("Pendentes: " + propostas.getLong("pendentes"));
-            propostasRejeitadas.setText("Rejeitadas: " + propostas.getLong("rejeitadas"));
+    /** TEMPORÁRIO: valores fictícios só para layout */
+    private void carregarFake() {
 
-            JSONObject sem = obj.getJSONObject("estagiosSemCandidaturas");
-            long total = sem.getLong("total");
-            double pct = sem.getDouble("percentagem");
-            estagiosSemCandidaturas.setText("Total: " + total + " (" + String.format("%.1f", pct) + "%)");
+        lblPercentAprovadas.setText("Aprovadas: 55%");
+        lblPercentPendentes.setText("Pendentes: 30%");
+        lblPercentRejeitadas.setText("Rejeitadas: 15%");
+        lblTotalSemCandidaturas.setText("Ofertas sem candidaturas: 12");
 
-            // Cursos
-            listCursos.getItems().clear();
-            JSONArray cursos = obj.getJSONArray("cursosMaisProcurados");
-            for (int i = 0; i < cursos.length(); i++) {
-                JSONObject it = cursos.getJSONObject(i);
-                listCursos.getItems().add((i+1) + ". " + it.getString("nome") + " — " + it.getLong("count") + " candidaturas");
-            }
+        listaCursos.getItems().setAll(
+                "Informática — 42 candidaturas",
+                "Gestão — 27 candidaturas",
+                "Marketing — 12 candidaturas"
+        );
 
-            // Empresas mais
-            listEmpresasMais.getItems().clear();
-            JSONArray empMais = obj.getJSONArray("empresasMaisProcuradas");
-            for (int i = 0; i < empMais.length(); i++) {
-                JSONObject it = empMais.getJSONObject(i);
-                listEmpresasMais.getItems().add((i+1) + ". " + it.getString("nome") + " — " + it.getLong("count"));
-            }
+        listaEmpresasMais.getItems().setAll(
+                "IBM — 30 candidaturas",
+                "SONAE — 18 candidaturas",
+                "Accenture — 15 candidaturas"
+        );
 
-            // Empresas menos (mostramos os primeiros N)
-            listEmpresasMenos.getItems().clear();
-            JSONArray empMenos = obj.getJSONArray("empresasMenosProcuradas");
-            for (int i = 0; i < empMenos.length(); i++) {
-                JSONObject it = empMenos.getJSONObject(i);
-                listEmpresasMenos.getItems().add((i+1) + ". " + it.getString("nome") + " — " + it.getLong("count"));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // fallback: mostrar mensagem simples
-            propostasAprovadas.setText("Erro a carregar estatísticas.");
-        }
+        listaEmpresasMenos.getItems().setAll(
+                "Startup A — 1 candidatura",
+                "Empresa X — 2 candidaturas"
+        );
     }
 
     @FXML

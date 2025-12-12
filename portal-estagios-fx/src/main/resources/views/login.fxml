@@ -15,5 +15,6 @@
     <TextField fx:id="emailField" promptText="Email"/>
     <PasswordField fx:id="passwordField" promptText="Password"/>
     <Button text="Entrar" fx:id="loginBtn" onAction="#login"/>
+    <Button text="Voltar" onAction="#voltar"/>
 
 </VBox>

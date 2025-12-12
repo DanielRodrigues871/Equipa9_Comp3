@@ -57,6 +57,17 @@ public class ListarPropostasController {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    public void editar() {
+        PropostaFX sel = tabela.getSelectionModel().getSelectedItem();
+        if (sel == null) return;
+
+        UserSession.setPropostaEditarId(sel.getId());
+
+        SceneManager.changeScene("editar_proposta.fxml");
+    }
+
 
     @FXML
     public void voltar() {

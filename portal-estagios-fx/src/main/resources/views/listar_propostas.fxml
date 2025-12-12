@@ -17,7 +17,10 @@
         </columns>
 
     </TableView>
-
-    <Button text="Voltar" onAction="#voltar"/>
+    
+    <HBox spacing="10">
+        <Button text="Editar" onAction="#editar"/>
+        <Button text="Voltar" onAction="#voltar"/>
+    </HBox>
 
 </VBox>

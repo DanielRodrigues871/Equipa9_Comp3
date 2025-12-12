@@ -11,7 +11,8 @@ public class UserSession {
     private static String ofertaEditarId;
     private static String ofertaSelecionada;
     private static String candidaturaSelecionada;
-    private static String cursoSelecionado;// ← ADICIONADO
+    private static String cursoSelecionado;
+    private static String propostaEditarId;// ← ADICIONADO
 
     public static void setUser(String idU, String n, String e, String t) {
         id = idU;
@@ -48,5 +49,16 @@ public class UserSession {
 
     public static void setCursoSelecionado(String id) { cursoSelecionado = id; }
     public static String getCursoSelecionado() { return cursoSelecionado; }
+    
+   
+
+    public static void setPropostaEditarId(String id) {
+        propostaEditarId = id;
+    }
+
+    public static String getPropostaEditarId() {
+        return propostaEditarId;
+    }
+
 
 }

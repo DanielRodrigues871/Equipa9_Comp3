@@ -10,12 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListarPropostasController {
 
     @FXML private TableView<PropostaFX> tabela;
+    @FXML private TableColumn<PropostaFX, String> colId;
     @FXML private TableColumn<PropostaFX, String> colTitulo;
     @FXML private TableColumn<PropostaFX, String> colEstado;
     @FXML private TableColumn<PropostaFX, Integer> colVagas;
@@ -23,6 +25,7 @@ public class ListarPropostasController {
 
     @FXML
     public void initialize() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
         colVagas.setCellValueFactory(new PropertyValueFactory<>("vagas"));
@@ -31,19 +34,20 @@ public class ListarPropostasController {
         carregar();
     }
 
-    private void carregar() {
+    @FXML
+    public void carregar() {
         try {
-            String repId = UserSession.getId();
+            String idRep = UserSession.getId();
 
-            JSONArray arr = ApiClient.getArray("/api/propostas/representante/" + repId);
+            JSONArray arr = ApiClient.getArray("/api/propostas/representante/" + idRep);
 
-            ObservableList<PropostaFX> lista = FXCollections.observableArrayList();
-
+            List<PropostaFX> lista = new ArrayList<>();
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject p = arr.getJSONObject(i);
 
                 lista.add(new PropostaFX(
+                        p.getString("id"),
                         p.getString("titulo"),
                         p.getString("estado"),
                         p.getInt("vagasDisponiveis"),
@@ -51,23 +55,21 @@ public class ListarPropostasController {
                 ));
             }
 
-            tabela.setItems(lista);
+            tabela.setItems(FXCollections.observableArrayList(lista));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
     public void editar() {
         PropostaFX sel = tabela.getSelectionModel().getSelectedItem();
         if (sel == null) return;
 
         UserSession.setPropostaEditarId(sel.getId());
-
         SceneManager.changeScene("editar_proposta.fxml");
     }
-
 
     @FXML
     public void voltar() {

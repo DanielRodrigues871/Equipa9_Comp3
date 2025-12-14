@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.upt.pt.fx.controller.MinhasCandidaturasController">
+
+    <!-- TOP -->
+    <top>
+        <Label text="Minhas Candidaturas"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-padding: 15;"/>
+    </top>
+
+    <!-- CENTER -->
+    <center>
+        <TableView fx:id="tabela" prefHeight="400">
+
+            <columns>
+                <TableColumn fx:id="colOferta" text="Oferta" prefWidth="300"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="150"/>
+                <TableColumn fx:id="colData" text="Data" prefWidth="150"/>
+            </columns>
+
+        </TableView>
+    </center>
+
+    <!-- BOTTOM -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER" style="-fx-padding: 15;">
+            <Button text="Ver Detalhes" onAction="#verDetalhes"/>
+            <Button text="Voltar" onAction="#voltar"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

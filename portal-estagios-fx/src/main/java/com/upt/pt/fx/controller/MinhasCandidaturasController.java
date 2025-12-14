@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Candidaturas que um estudante fez
 public class MinhasCandidaturasController {
 
     @FXML private TableView<CandidaturaFX> tabela;

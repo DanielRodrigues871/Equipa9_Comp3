@@ -15,27 +15,30 @@ public class DashboardEstudanteController {
         welcomeLabel.setText("Bem-vindo, " + UserSession.getNome() + "!");
     }
 
+    // ================== NAVEGAÇÃO ==================
+
     @FXML
     public void verOfertas() {
         SceneManager.changeScene("consultar_ofertas.fxml");
     }
 
-
     @FXML
     public void verCandidaturas() {
-        System.out.println("→ GET /api/candidaturas/estudante/" + UserSession.getId());
+        SceneManager.changeScene("minhas_candidaturas.fxml");
     }
 
     @FXML
     public void candidatar() {
-        System.out.println("→ POST /api/candidaturas?estudanteId=... etc");
+        // Redireciona para ofertas aprovadas
+        SceneManager.changeScene("consultar_ofertas.fxml");
     }
-    
+
     @FXML
     public void verNotificacoes() {
         SceneManager.changeScene("notificacoes.fxml");
     }
 
+    // ================== LOGOUT ==================
 
     @FXML
     public void logout() {

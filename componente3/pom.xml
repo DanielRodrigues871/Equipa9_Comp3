@@ -4,8 +4,8 @@
     https://maven.apache.org/xsd/maven-4.0.0.xsd">
     
  <modelVersion>4.0.0</modelVersion>
- <groupId>lp</groupId>
- <artifactId>JavaFxClient</artifactId>
+ <groupId>upt.pt</groupId>
+ <artifactId>componente3</artifactId>
  <version>1.0-SNAPSHOT</version>
 
  <properties>
@@ -47,7 +47,7 @@
       <version>0.0.8</version>
 
       <configuration>
-         <mainClass>lp.JavaFxClient.App</mainClass>
+         <mainClass>componente3.PortalFXMain</mainClass>
       </configuration>
     </plugin>
    </plugins>

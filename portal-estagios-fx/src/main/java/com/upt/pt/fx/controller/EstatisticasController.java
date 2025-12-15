@@ -1,9 +1,14 @@
 package com.upt.pt.fx.controller;
 
 import com.upt.pt.SceneManager;
+import com.upt.pt.fx.service.ApiClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 
 public class EstatisticasController {
 
@@ -16,41 +21,52 @@ public class EstatisticasController {
     @FXML private ListView<String> listaEmpresasMais;
     @FXML private ListView<String> listaEmpresasMenos;
 
+    private final DecimalFormat df = new DecimalFormat("0.##");
+
     @FXML
     public void initialize() {
-        carregarFake(); // será substituído pelo carregarReal();
+        carregarReal();
     }
 
-    /** FUTURO: carregar estatísticas reais via API */
     private void carregarReal() {
-        // JSONObject obj = ApiClient.getObject("/api/estatisticas");
-        // preencher labels e listas com obj.get(...)
+        try {
+            JSONObject obj = ApiClient.getObject("/api/estatisticas");
+
+            lblPercentAprovadas.setText(
+                    "Aprovadas: " + df.format(obj.getDouble("percentAprovadas")) + "%"
+            );
+            lblPercentPendentes.setText(
+                    "Pendentes: " + df.format(obj.getDouble("percentPendentes")) + "%"
+            );
+            lblPercentRejeitadas.setText(
+                    "Rejeitadas: " + df.format(obj.getDouble("percentRejeitadas")) + "%"
+            );
+
+            lblTotalSemCandidaturas.setText(
+                    "Ofertas sem candidaturas: " + obj.getInt("ofertasSemCandidaturas")
+            );
+
+            preencherLista(listaCursos, obj.optJSONArray("cursosMaisProcurados"));
+            preencherLista(listaEmpresasMais, obj.optJSONArray("empresasMaisProcuradas"));
+            preencherLista(listaEmpresasMenos, obj.optJSONArray("empresasMenosEscolhidas"));
+
+        } catch (Exception e) {
+            lblPercentAprovadas.setText("Erro ao carregar estatísticas.");
+            e.printStackTrace();
+        }
     }
 
-    /** TEMPORÁRIO: valores fictícios só para layout */
-    private void carregarFake() {
+    private void preencherLista(ListView<String> listView, JSONArray arr) {
+        listView.getItems().clear();
 
-        lblPercentAprovadas.setText("Aprovadas: 55%");
-        lblPercentPendentes.setText("Pendentes: 30%");
-        lblPercentRejeitadas.setText("Rejeitadas: 15%");
-        lblTotalSemCandidaturas.setText("Ofertas sem candidaturas: 12");
+        if (arr == null || arr.isEmpty()) {
+            listView.getItems().add("Sem dados disponíveis");
+            return;
+        }
 
-        listaCursos.getItems().setAll(
-                "Informática — 42 candidaturas",
-                "Gestão — 27 candidaturas",
-                "Marketing — 12 candidaturas"
-        );
-
-        listaEmpresasMais.getItems().setAll(
-                "IBM — 30 candidaturas",
-                "SONAE — 18 candidaturas",
-                "Accenture — 15 candidaturas"
-        );
-
-        listaEmpresasMenos.getItems().setAll(
-                "Startup A — 1 candidatura",
-                "Empresa X — 2 candidaturas"
-        );
+        for (int i = 0; i < arr.length(); i++) {
+            listView.getItems().add(arr.getString(i));
+        }
     }
 
     @FXML

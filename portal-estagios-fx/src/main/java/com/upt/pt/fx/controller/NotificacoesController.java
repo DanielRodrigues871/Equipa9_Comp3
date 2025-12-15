@@ -44,7 +44,7 @@ public class NotificacoesController {
                         n.getString("id"),
                         n.getString("mensagem"),
                         n.getBoolean("lida"),
-                        n.getString("data")
+                        n.getString("dataCriacao")
                 ));
             }
 
@@ -57,15 +57,21 @@ public class NotificacoesController {
     @FXML
     public void marcarTodas() {
         try {
-            String userId = UserSession.getId();
-
-            ApiClient.post("/api/notificacoes/" + userId + "/marcar-todas", new JSONObject());
-
-            carregar(); // atualizar tabela
+            for (NotificationFX n : tabela.getItems()) {
+                if (!n.isLida()) {
+                    ApiClient.put(
+                            "/api/notificacoes/" + n.getId() + "/lida",
+                            new JSONObject()
+                    );
+                }
+            }
+            carregar(); // refrescar tabela
         } catch (Exception e) {
-            System.out.println("Erro ao marcar notificações.");
+            e.printStackTrace();
         }
     }
+
+
 
     @FXML
     public void voltar() {

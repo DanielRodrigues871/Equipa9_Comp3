@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.CriarEmpresaController"
+      spacing="12" alignment="CENTER" padding="20">
+
+    <Label text="Criar Empresa"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtNome" promptText="Nome da Empresa"/>
+    <TextField fx:id="txtNif" promptText="NIF"/>
+    <TextField fx:id="txtEmail" promptText="Email"/>
+    <TextField fx:id="txtMorada" promptText="Morada"/>
+
+    <Label fx:id="lblErro" textFill="red"/>
+
+    <Button text="Criar Empresa" onAction="#criar"/>
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

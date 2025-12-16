@@ -37,6 +37,6 @@ public class DashboardRepresentanteController {
     @FXML
     public void logout() {
         UserSession.logout();
-        SceneManager.changeScene("login.fxml");
+        SceneManager.changeScene("welcome.fxml");
     }
 }

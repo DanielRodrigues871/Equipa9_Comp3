@@ -87,4 +87,21 @@ public class NotificacoesController {
                 break;
         }
     }
+    
+    @FXML private Label badgeNotificacoes;
+
+    private void atualizarBadge() {
+        try {
+            long count = ApiClient
+                    .getObject("/api/notificacoes/utilizador/" 
+                            + UserSession.getId() + "/nao-lidas")
+                    .getLong("value");
+
+            badgeNotificacoes.setVisible(count > 0);
+
+        } catch (Exception e) {
+            badgeNotificacoes.setVisible(false);
+        }
+    }
+
 }

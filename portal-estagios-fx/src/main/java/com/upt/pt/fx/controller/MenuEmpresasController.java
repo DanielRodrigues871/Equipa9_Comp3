@@ -18,6 +18,14 @@ public class MenuEmpresasController {
 
     @FXML
     public void voltar() {
-        SceneManager.changeScene("dashboard_representante.fxml");
+        switch (UserSession.getTipo()) {
+            case "COORDENADOR":
+                SceneManager.changeScene("dashboard_coordenador.fxml");
+                break;
+            case "REPRESENTANTE":
+                SceneManager.changeScene("dashboard_representante.fxml");
+                break;
+        }
     }
+
 }

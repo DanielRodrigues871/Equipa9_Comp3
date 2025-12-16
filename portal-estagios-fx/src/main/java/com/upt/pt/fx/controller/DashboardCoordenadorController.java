@@ -76,7 +76,7 @@ public class DashboardCoordenadorController {
 
     @FXML
     public void menuEmpresas() {
-        System.out.println("→ Abrir sub-menu Empresa");
+        System.out.println("menu_empresas.fxml");
     }
 
     @FXML

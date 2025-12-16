@@ -1,10 +1,14 @@
 package com.upt.pt.fx.controller;
 
 import com.upt.pt.SceneManager;
+import com.upt.pt.fx.model.EmpresaFX;
 import com.upt.pt.fx.service.ApiClient;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.collections.ObservableList;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +33,8 @@ public class ListarEmpresasController {
     public void recarregar() {
         try {
             JSONArray arr = ApiClient.getArray("/api/empresas");
-            var lista = FXCollections.<EmpresaFX>observableArrayList();
+            ObservableList<EmpresaFX> lista = FXCollections.observableArrayList();
+
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);

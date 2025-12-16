@@ -50,6 +50,11 @@
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
+        <dependency>
+        	<groupId>com.upt.pt</groupId>
+        	<artifactId>Equipa9_Comp2</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <!-- ====================== -->

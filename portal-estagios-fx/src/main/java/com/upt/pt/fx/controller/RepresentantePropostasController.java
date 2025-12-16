@@ -73,7 +73,7 @@ public class RepresentantePropostasController {
         }
 
         UserSession.setPropostaEditarId(sel.getId());
-        SceneManager.changeScene("editar_proposta.fxml"); // ou representante_editar_proposta.fxml se renomeares
+        SceneManager.changeScene("representante_editar_proposta.fxml"); // ou representante_editar_proposta.fxml se renomeares
     }
 
     @FXML

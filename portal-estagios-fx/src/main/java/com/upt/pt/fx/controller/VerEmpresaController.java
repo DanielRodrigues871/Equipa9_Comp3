@@ -33,6 +33,21 @@ public class VerEmpresaController {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    public void arquivarEmpresa() {
+        try {
+            String id = UserSession.getEmpresaId();
+
+            ApiClient.delete("/api/empresas/" + id);
+
+            SceneManager.changeScene("menu_empresas.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+    }
+
 
     @FXML
     public void voltar() {

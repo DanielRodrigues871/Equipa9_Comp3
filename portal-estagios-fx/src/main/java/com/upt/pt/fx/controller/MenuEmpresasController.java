@@ -15,6 +15,12 @@ public class MenuEmpresasController {
     public void editarEmpresa() {
         SceneManager.changeScene("editar_empresa.fxml");
     }
+    
+    @FXML
+    public void listarEmpresas() {
+        SceneManager.changeScene("listar_empresas.fxml");
+    }
+
 
     @FXML
     public void voltar() {

@@ -12,7 +12,8 @@
     <Label fx:id="nomeLabel"/>
     <Label fx:id="nifLabel"/>
     <Label fx:id="areaLabel"/>
-
+    
+    <Button text="Arquivar empresa" onAction="#arquivarEmpresa"/>
     <Button text="Voltar" onAction="#voltar"/>
 
 </VBox>

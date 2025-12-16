@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.upt.pt.fx.controller.ListarEmpresasController"
+      spacing="10" alignment="CENTER" padding="20">
+
+    <Label text="Empresas" style="-fx-font-size: 20px;"/>
+
+    <!-- Tabela com as empresas -->
+    <TableView fx:id="empresasTable" prefWidth="600" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="nomeCol" text="Nome" prefWidth="250"/>
+            <TableColumn fx:id="nifCol"  text="NIF"  prefWidth="150"/>
+            <TableColumn fx:id="statusCol" text="Estado" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- Botões de ação -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Ativar" onAction="#ativarSelecionada"/>
+        <Button text="Desativar" onAction="#desativarSelecionada"/>
+        <Button text="Atualizar Lista" onAction="#recarregar"/>
+        <Button text="Voltar" onAction="#voltar"/>
+    </HBox>
+
+    <Label fx:id="mensagemLabel" textFill="red"/>
+
+</VBox>

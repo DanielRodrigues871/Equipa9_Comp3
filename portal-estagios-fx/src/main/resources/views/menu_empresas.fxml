@@ -13,6 +13,8 @@
 
     <Button text="Ver Dados da Empresa" onAction="#verEmpresa"/>
     <Button text="Atualizar Dados da Empresa" onAction="#editarEmpresa"/>
+    <Button text="Listar Empresas" onAction="#listarEmpresas"/>
+
 
     <Button text="Voltar" onAction="#voltar"/>
 

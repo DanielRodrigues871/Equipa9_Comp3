@@ -4,24 +4,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-
 <VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.RegisterCoordenadorController"
-      >
-      
+      fx:controller="com.upt.pt.fx.controller.RegisterCoordenadorController">
+
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
     <Label text="Registo - Coordenador" style="-fx-font-size: 20px;"/>
+
     <Label fx:id="errorLabel" textFill="red"/>
 
     <TextField fx:id="nomeField" promptText="Nome"/>
     <TextField fx:id="emailField" promptText="Email"/>
     <PasswordField fx:id="passwordField" promptText="Password"/>
 
-    <TextField fx:id="departamentoIdField" promptText="ID do Departamento"/>
+    <!-- DEPARTAMENTO VEM DA BASE DE DADOS -->
+    <ComboBox fx:id="departamentoCombo" prefWidth="250" promptText="Departamento"/>
 
     <Button text="Registar" onAction="#registar"/>
     <Button text="Voltar" onAction="#voltar"/>

@@ -4,13 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-
 <VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.RegisterEstudanteController"
-      stylesheets="@../css/style.css"
-      >
-      
+      fx:controller="com.upt.pt.fx.controller.RegisterEstudanteController">
+
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -23,10 +20,13 @@
     <TextField fx:id="emailField" promptText="Email"/>
     <PasswordField fx:id="passwordField" promptText="Password"/>
 
-    <TextField fx:id="cursoIdField" promptText="ID do Curso"/>
+    <!-- CURSO VEM DA BASE DE DADOS -->
+    <ComboBox fx:id="cursoCombo" prefWidth="250" promptText="Curso"/>
+
     <TextField fx:id="numeroEstudanteField" promptText="Número de Estudante"/>
     <TextField fx:id="anoMatriculaField" promptText="Ano Matrícula"/>
 
     <Button text="Registar" onAction="#registar"/>
     <Button text="Voltar" onAction="#voltar"/>
+
 </VBox>

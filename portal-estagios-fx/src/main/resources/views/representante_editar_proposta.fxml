@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15.0"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.upt.pt.fx.controller.RepresentanteEditarPropostaController"
+      alignment="CENTER_LEFT">
+
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+
+    <children>
+        <Label text="Editar Proposta de Estágio" textFill="#2c3e50">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Label>
+
+        <TextField fx:id="tituloField" promptText="Título da proposta" />
+
+        <TextArea fx:id="descricaoArea" promptText="Descrição" wrapText="true" />
+
+        <TextArea fx:id="requisitosArea" promptText="Requisitos" wrapText="true" />
+
+        <TextField fx:id="localizacaoField" promptText="Localização" />
+
+        <TextField fx:id="duracaoField" promptText="Duração (meses)" />
+
+        <TextField fx:id="vagasField" promptText="Vagas disponíveis" />
+
+        <Label fx:id="errorLabel" textFill="red" />
+
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+
+        <HBox spacing="10.0" alignment="CENTER_RIGHT">
+            <Button text="Guardar Alterações" onAction="#guardar"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            <Button text="Voltar" onAction="#voltar"
+                    style="-fx-cursor: hand;"/>
+        </HBox>
+    </children>
+</VBox>

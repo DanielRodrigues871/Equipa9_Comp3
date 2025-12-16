@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.NotificacoesController"
-      alignment="CENTER"
-      spacing="15"
-      padding="20">
+<AnchorPane fx:id="contentPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.upt.pt.fx.controller.NotificacoesController">
 
-    <Label text="Notificações" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <VBox alignment="CENTER" spacing="15" padding="20">
+        <Label text="Notificações" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <TableView fx:id="tabela" prefWidth="600">
-    <columns>
-        <TableColumn fx:id="colMensagem" text="Mensagem" prefWidth="350" />
-        <TableColumn fx:id="colLida" text="Lida" prefWidth="100" />
-        <TableColumn fx:id="colData" text="Data" prefWidth="150" />
-    </columns>
-</TableView>
+        <TableView fx:id="tabela" prefWidth="600" prefHeight="300">
+            <columns>
+                <TableColumn fx:id="colMensagem" text="Mensagem" prefWidth="350" />
+                <TableColumn fx:id="colLida" text="Lida" prefWidth="100" />
+                <TableColumn fx:id="colData" text="Data" prefWidth="150" />
+            </columns>
+        </TableView>
 
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Marcar Todas Como Lidas" onAction="#marcarTodas" style="-fx-cursor: hand;"/>
+            <Button text="Voltar" onAction="#voltar" style="-fx-cursor: hand;"/>
+        </HBox>
+    </VBox>
 
-
-    
-    <Button text="Marcar Todas Como Lidas" onAction="#marcarTodas"/>
-
-    <Button text="Voltar" onAction="#voltar"/>
-
-</VBox>
+</AnchorPane>

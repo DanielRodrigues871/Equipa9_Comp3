@@ -38,9 +38,10 @@ public class DashboardRepresentanteController {
     }
 
     @FXML
-    public void showGestaoEmpresas() {
-        loadView("representante_empresas.fxml");         // ecrã onde fazes gestão de empresas do representante
+    public void showGestaoEmpresas() {  
+        loadView("representante_menu_empresas.fxml");  // ← ADICIONAR/ATUALIZAR
     }
+
 
     @FXML
     public void showNotificacoes() {

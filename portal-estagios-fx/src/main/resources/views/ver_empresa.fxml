@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="contentPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.upt.pt.fx.controller.VerEmpresaController">
@@ -9,14 +10,17 @@
     <VBox spacing="12" alignment="CENTER_LEFT" padding="20">
         <Label text="Dados da Empresa" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
         
-        <!-- Labels para mostrar dados (não editáveis) -->
-        <Label text="Nome: " fx:id="nomeLabel"/>
-        <Label text="NIF: " fx:id="nifLabel"/>
-        <Label text="Email: " fx:id="emailLabel"/>
-        <Label text="Morada: " fx:id="moradaLabel"/>
-        <Label text="Estado: " fx:id="estadoLabel"/>
+        <Label fx:id="nomeLabel" style="-fx-font-size: 14px;"/>
+        <Label fx:id="nifLabel" style="-fx-font-size: 14px;"/>
+        <Label fx:id="emailLabel" style="-fx-font-size: 14px;"/>
+        <Label fx:id="moradaLabel" style="-fx-font-size: 14px;"/>
+        <Label fx:id="estadoLabel" style="-fx-font-size: 14px;"/>
 
-        <Button text="Voltar" onAction="#voltar"/>
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Arquivar Empresa" onAction="#arquivarEmpresa" style="-fx-cursor: hand;"/>
+            <Button text="Editar Empresa" onAction="#editar" style="-fx-cursor: hand;"/>
+            <Button text="Voltar" onAction="#voltar" style="-fx-cursor: hand;"/>
+        </HBox>
     </VBox>
 
 </AnchorPane>

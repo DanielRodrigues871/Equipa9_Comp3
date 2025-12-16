@@ -16,7 +16,10 @@ public class VerEmpresaController {
     @FXML private AnchorPane contentPane;
     @FXML private Label nomeLabel;
     @FXML private Label nifLabel;
-    @FXML private Label areaLabel;  // ← ADICIONADO (estava no FXML)
+    @FXML private Label emailLabel;     // ← ADICIONADO
+    @FXML private Label moradaLabel;    // ← ADICIONADO
+    @FXML private Label estadoLabel;    // ← ADICIONADO
+    @FXML private Label areaLabel;
 
     @FXML
     public void initialize() {
@@ -27,9 +30,14 @@ public class VerEmpresaController {
         try {
             String id = UserSession.getEmpresaId();
             JSONObject obj = ApiClient.getObject("/api/empresas/" + id);
+            
             nomeLabel.setText("Nome: " + obj.getString("nome"));
             nifLabel.setText("NIF: " + obj.getString("nif"));
-            areaLabel.setText("Área: " + obj.getString("area"));
+            emailLabel.setText("Email: " + obj.optString("email", "Não definido"));
+            moradaLabel.setText("Morada: " + obj.optString("morada", "Não definida"));
+            areaLabel.setText("Área: " + obj.optString("area", "Não definida"));
+            estadoLabel.setText("Estado: " + (obj.optBoolean("ativa", true) ? "ATIVA" : "INATIVA"));
+            
         } catch (Exception e) {
             nomeLabel.setText("Erro ao carregar empresa!");
             e.printStackTrace();
@@ -38,18 +46,32 @@ public class VerEmpresaController {
 
     @FXML
     public void arquivarEmpresa() {
+        // SÓ COORDENADOR pode arquivar (representante não tem este botão no FXML)
+        if (!"COORDENADOR".equals(UserSession.getTipo())) {
+            return; // ignora silenciosamente
+        }
+        
         try {
             String id = UserSession.getEmpresaId();
             ApiClient.delete("/api/empresas/" + id);
-            loadView("coordenador_menu_empresas.fxml");  // ← MUDADO
+            loadView("coordenador_menu_empresas.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
+    public void editar() {
+        loadView("editar_empresa.fxml");
+    }
+
+    @FXML
     public void voltar() {
-        loadView("coordenador_menu_empresas.fxml");  // ← MUDADO
+        // Volta ao menu correto dependendo do tipo de user
+        String menu = UserSession.getTipo().equals("COORDENADOR") 
+            ? "coordenador_menu_empresas.fxml" 
+            : "representante_menu_empresas.fxml";
+        loadView(menu);
     }
 
     private void loadView(String fxmlFile) {

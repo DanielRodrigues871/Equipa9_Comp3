@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15.0"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.upt.pt.fx.controller.RepresentanteCriarPropostaController">
+
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+
+    <children>
+        <!-- Título -->
+        <Label text="Criar Nova Proposta de Estágio" textFill="#2c3e50">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Label>
+
+        <!-- Primeira linha: Título + Tipo -->
+        <HBox spacing="20.0">
+            <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                <Label text="Título da Proposta" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="tituloField" promptText="Ex: Estágio em Desenvolvimento Java" />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label text="Tipo de Estágio" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="tipoCombo" promptText="CURRICULAR / EXTRA_CURRICULAR" prefWidth="220.0"/>
+            </VBox>
+        </HBox>
+
+        <!-- Segunda linha: Localização + Duração + Vagas -->
+        <HBox spacing="20.0">
+            <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+                <Label text="Localização" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="localizacaoField" promptText="Ex: Porto, remoto..." />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label text="Duração (meses)" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="duracaoField" promptText="Ex: 6" prefWidth="100.0"/>
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label text="Vagas disponíveis" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="vagasField" promptText="Ex: 2" prefWidth="100.0"/>
+            </VBox>
+        </HBox>
+
+        <!-- Descrição -->
+        <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+            <Label text="Descrição" style="-fx-font-weight: bold;"/>
+            <TextArea fx:id="descricaoArea" wrapText="true"
+                      promptText="Descreva as tarefas principais da proposta..."
+                      VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+        <!-- Requisitos -->
+        <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+            <Label text="Requisitos" style="-fx-font-weight: bold;"/>
+            <TextArea fx:id="requisitosArea" wrapText="true"
+                      promptText="Conhecimentos técnicos, soft-skills, etc."
+                      VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+        <!-- Mensagem de erro -->
+        <Label fx:id="errorLabel" textFill="red"/>
+
+        <!-- Botões -->
+        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+            <Button text="Limpar" onAction="#limparFormulario"
+                    style="-fx-cursor: hand;"/>
+            <Button text="Publicar Proposta" onAction="#criar"
+                    style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;">
+                <padding>
+                    <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+                </padding>
+            </Button>
+            <Button text="Voltar" onAction="#voltar" style="-fx-cursor: hand;"/>
+        </HBox>
+
+    </children>
+</VBox>

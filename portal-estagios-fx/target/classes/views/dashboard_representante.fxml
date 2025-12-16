@@ -1,23 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.DashboardRepresentanteController"
-      alignment="CENTER"
-      spacing="15"
-      prefWidth="400"
-      prefHeight="400">
+<BorderPane fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.upt.pt.fx.controller.DashboardRepresentanteController">
 
-    <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <left>
+        <VBox prefHeight="720.0" prefWidth="260.0" spacing="10.0"
+              style="-fx-background-color: #2c3e50;">
+            <padding>
+                <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+            </padding>
 
-    <Button text="Criar Proposta de Estágio" onAction="#criarProposta"/>
-    <Button text="Minhas Propostas" onAction="#verPropostas"/>
-    <Button text="Gestão de Empresas" onAction="#menuEmpresas"/>
-    <Button text="Notificações" onAction="#verNotificacoes"/>
+            <children>
+                <Label text="PORTAL UPT" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </Label>
 
-    <Button text="Logout" onAction="#logout"/>
+                <Label text="Área do Representante" textFill="#bdc3c7">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Label>
 
-</VBox>
+                <Separator opacity="0.3" prefWidth="200.0" />
+
+                <Label text="PROPOSTAS" textFill="#95a5a6">
+                    <font>
+                        <Font name="System Bold" size="11.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Label>
+
+                <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
+                        onAction="#showCriarProposta"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
+                        text="➕  Criar Proposta">
+                    <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
+                    <font><Font size="14.0" /></font>
+                </Button>
+
+                <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
+                        onAction="#showMinhasPropostas"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
+                        text="📋  Minhas Propostas">
+                    <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
+                    <font><Font size="14.0" /></font>
+                </Button>
+
+                <Label text="EMPRESAS" textFill="#95a5a6">
+                    <font>
+                        <Font name="System Bold" size="11.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                </Label>
+
+                <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
+                        onAction="#showGestaoEmpresas"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
+                        text="🏢  Gestão de Empresas">
+                    <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
+                    <font><Font size="14.0" /></font>
+                </Button>
+
+                <Label text="OUTROS" textFill="#95a5a6">
+                    <font>
+                        <Font name="System Bold" size="11.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                </Label>
+
+                <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
+                        onAction="#showNotificacoes"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
+                        text="🔔  Notificações">
+                    <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                    </padding>
+                    <font><Font size="14.0" /></font>
+                </Button>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#logout"
+                        style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 5;"
+                        text="Terminar Sessão">
+                    <padding>
+                        <Insets bottom="12.0" top="12.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #34495e;">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <Label fx:id="welcomeLabel" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#logout"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <AnchorPane fx:id="contentPane" style="-fx-background-color: #ecf0f1;">
+            <children>
+                <VBox alignment="CENTER"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <Label text="Bem-vindo, Representante" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </Label>
+                        <Label text="Selecione uma opção no menu lateral para começar."
+                               textFill="#7f8c8d">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </center>
+
+</BorderPane>

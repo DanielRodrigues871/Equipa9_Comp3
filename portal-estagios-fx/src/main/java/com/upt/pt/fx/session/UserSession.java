@@ -7,7 +7,12 @@ public class UserSession {
     private static String email;
     private static String tipo;
 
-    private static String ofertaSelecionada; // <<–– novo campo
+    private static String empresaId;
+    private static String ofertaEditarId;
+    private static String ofertaSelecionada;
+    private static String candidaturaSelecionada;
+    private static String cursoSelecionado;
+    private static String propostaEditarId;// ← ADICIONADO
 
     public static void setUser(String idU, String n, String e, String t) {
         id = idU;
@@ -21,24 +26,39 @@ public class UserSession {
     public static String getEmail() { return email; }
     public static String getTipo() { return tipo; }
 
-    // NOVOS GET/SET
-    public static void setOfertaSelecionada(String idOferta) {
-        ofertaSelecionada = idOferta;
-    }
-
-    public static String getOfertaSelecionada() {
-        return ofertaSelecionada;
-    }
-
     public static void logout() {
-        id = nome = email = tipo = ofertaSelecionada = null;
-        empresaId = null;
-
+        id = nome = email = tipo = null;
+        empresaId = ofertaEditarId = ofertaSelecionada = null;
     }
-    
-    private static String empresaId;
-    public static void setEmpresaId(String id) { empresaId = id; }
+
+    // ---------------- EMPRESA ----------------
+    public static void setEmpresaId(String empId) { empresaId = empId; }
     public static String getEmpresaId() { return empresaId; }
 
+    // ---------------- OFERTA EDITAR ----------------
+    public static void setOfertaEditarId(String ofertaId) { ofertaEditarId = ofertaId; }
+    public static String getOfertaEditarId() { return ofertaEditarId; }
+
+    // ---------------- OFERTA SELECIONADA (para candidatura) ----------------
+    public static void setOfertaSelecionada(String ofertaId) { ofertaSelecionada = ofertaId; }
+    public static String getOfertaSelecionada() { return ofertaSelecionada; }
     
+    public static void setCandidaturaSelecionada(String id) { candidaturaSelecionada = id; }
+    public static String getCandidaturaSelecionada() { return candidaturaSelecionada; }
+    
+
+    public static void setCursoSelecionado(String id) { cursoSelecionado = id; }
+    public static String getCursoSelecionado() { return cursoSelecionado; }
+    
+   
+
+    public static void setPropostaEditarId(String id) {
+        propostaEditarId = id;
+    }
+
+    public static String getPropostaEditarId() {
+        return propostaEditarId;
+    }
+
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
@@ -75,6 +75,7 @@
 
                         <TextField fx:id="cursoIdField" promptText="ID do Curso" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
+                                   <ComboBox fx:id="cursoCombo" prefWidth="250" promptText="Curso"/>
                         
                         <TextField fx:id="anoMatriculaField" promptText="Ano de Matrícula (Ex: 2023)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />

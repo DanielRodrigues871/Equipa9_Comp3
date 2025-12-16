@@ -27,8 +27,12 @@
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/RegisterCoordenadorController.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/RegisterEstudanteController.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/RegisterRepresentanteController.java
+/Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/RepresentanteCriarPropostaController.java
+/Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/RepresentantePropostasController.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/VerEmpresaController.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/controller/WelcomeController.java
+/Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/model/CursoOption.java
+/Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/model/DepartamentoOption.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/model/NotificationFX.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/model/OfertaFX.java
 /Users/danielrodrigues/git/Equipa9_Comp3/portal-estagios-fx/src/main/java/com/upt/pt/fx/model/PropostaFX.java

@@ -2,11 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?> 
 <?import javafx.scene.layout.VBox?>
@@ -32,10 +32,10 @@
     <HBox spacing="10.0" alignment="CENTER_LEFT" style="-fx-background-color: #ecf0f1; -fx-padding: 10; -fx-background-radius: 5;">
         <Label text="Filtrar por:" style="-fx-font-weight: bold;"/>
         
-        <TextField fx:id="txtFiltroOferta" promptText="ID da Oferta..." prefWidth="200.0"/>
-        <TextField fx:id="txtFiltroEstudante" promptText="ID do Estudante..." prefWidth="200.0"/>
+        <ComboBox fx:id="cbFiltroOferta" promptText="Todas as Ofertas..." prefWidth="300.0"/>
+        <ComboBox fx:id="cbFiltroEstudante" promptText="Todos os Estudantes..." prefWidth="300.0"/>
         
-        <Button text="🔍 Pesquisar" onAction="#aplicarFiltros" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="🔍 Filtrar" onAction="#aplicarFiltros" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-cursor: hand;"/>
         <Button text="Limpar" onAction="#limparFiltros" style="-fx-cursor: hand;"/>
     </HBox>
     

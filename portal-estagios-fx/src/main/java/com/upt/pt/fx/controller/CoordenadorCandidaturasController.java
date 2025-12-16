@@ -9,9 +9,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.util.StringConverter;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.Optional;
 
 public class CoordenadorCandidaturasController {
@@ -22,21 +22,21 @@ public class CoordenadorCandidaturasController {
     @FXML private TableColumn<JSONObject, String> colData;
     @FXML private TableColumn<JSONObject, String> colEstado;
 
-    // Filtros
-    @FXML private TextField txtFiltroOferta;
-    @FXML private TextField txtFiltroEstudante;
+    // --- ALTERAÇÃO AQUI: Filtros agora são ComboBox ---
+    @FXML private ComboBox<JSONObject> cbFiltroOferta;
+    @FXML private ComboBox<JSONObject> cbFiltroEstudante;
 
     @FXML
     public void initialize() {
         configurarColunas();
-        carregarTodas(); // Por defeito carrega todas
+        configurarFiltros(); // Configura o visual e carrega dados nas combos
+        carregarTodas();     // Carrega a tabela inicial
     }
 
     private void configuringColunas() {
         colEstudante.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("estudanteNome", "N/A")));
         colOferta.setCellValueFactory(data -> {
             JSONObject json = data.getValue();
-            // Verifica se vem aninhado ou flat
             if(json.has("oferta") && json.get("oferta") instanceof JSONObject) 
                 return new SimpleStringProperty(json.getJSONObject("oferta").optString("titulo", "-"));
             return new SimpleStringProperty(json.optString("ofertaTitulo", "-"));
@@ -49,7 +49,6 @@ public class CoordenadorCandidaturasController {
          colEstudante.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("estudanteNome", "N/A")));
         colOferta.setCellValueFactory(data -> {
             JSONObject json = data.getValue();
-            // Verifica se vem aninhado ou flat
             if(json.has("oferta") && json.get("oferta") instanceof JSONObject) 
                 return new SimpleStringProperty(json.getJSONObject("oferta").optString("titulo", "-"));
             return new SimpleStringProperty(json.optString("ofertaTitulo", "-"));
@@ -58,7 +57,57 @@ public class CoordenadorCandidaturasController {
         colEstado.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("estado", "-")));
     }
 
-    // --- LÓGICA DE CARREGAMENTO E FILTROS ---
+    // --- NOVO: Configuração das ComboBox de Filtro ---
+    private void configurarFiltros() {
+        // 1. Converter JSON para Texto Bonito na Oferta
+        cbFiltroOferta.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(JSONObject o) {
+                if (o == null) return null;
+                String empresa = o.optString("empresaNome", "");
+                if (o.has("empresa") && o.get("empresa") instanceof JSONObject) {
+                    empresa = o.getJSONObject("empresa").optString("nome");
+                }
+                return o.optString("titulo", "?") + (empresa.isEmpty() ? "" : " (" + empresa + ")");
+            }
+            @Override public JSONObject fromString(String s) { return null; }
+        });
+
+        // 2. Converter JSON para Texto Bonito no Estudante
+        cbFiltroEstudante.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(JSONObject e) {
+                if (e == null) return null;
+                return e.optString("nome", "?") + " (" + e.optString("numeroEstudante", "?") + ")";
+            }
+            @Override public JSONObject fromString(String s) { return null; }
+        });
+
+        // 3. Carregar dados da API para as combos
+        carregarListasFiltro();
+    }
+
+    private void carregarListasFiltro() {
+        try {
+            // Ofertas
+            JSONArray arrOfertas = ApiClient.getArray("/api/ofertas");
+            ObservableList<JSONObject> listOfertas = FXCollections.observableArrayList();
+            for(int i=0; i<arrOfertas.length(); i++) listOfertas.add(arrOfertas.getJSONObject(i));
+            cbFiltroOferta.setItems(listOfertas);
+
+            // Estudantes
+            JSONArray arrEstudantes = ApiClient.getArray("/api/estudantes");
+            ObservableList<JSONObject> listEstudantes = FXCollections.observableArrayList();
+            for(int i=0; i<arrEstudantes.length(); i++) listEstudantes.add(arrEstudantes.getJSONObject(i));
+            cbFiltroEstudante.setItems(listEstudantes);
+
+        } catch (Exception e) {
+            System.err.println("Aviso: Não foi possível carregar listas para os filtros.");
+            e.printStackTrace();
+        }
+    }
+
+    // --- LÓGICA DE APLICAR FILTROS ---
 
     private void carregarTodas() {
         carregarEndpoint("/api/candidaturas");
@@ -66,25 +115,32 @@ public class CoordenadorCandidaturasController {
 
     @FXML
     public void aplicarFiltros() {
-        String ofertaId = txtFiltroOferta.getText().trim();
-        String estId = txtFiltroEstudante.getText().trim();
+        JSONObject ofertaSel = cbFiltroOferta.getValue();
+        JSONObject estudanteSel = cbFiltroEstudante.getValue();
 
-        if (!ofertaId.isEmpty()) {
-            // Prioridade ao filtro de oferta
+        if (ofertaSel != null) {
+            // Filtra por Oferta
+            String ofertaId = ofertaSel.getString("id");
             carregarEndpoint("/api/candidaturas/oferta/" + ofertaId);
-        } else if (!estId.isEmpty()) {
-            // Se não tem oferta, tenta estudante
+            
+            // Limpa a outra combo para não confundir visualmente
+            cbFiltroEstudante.getSelectionModel().clearSelection(); 
+            
+        } else if (estudanteSel != null) {
+            // Filtra por Estudante
+            String estId = estudanteSel.getString("id");
             carregarEndpoint("/api/candidaturas/estudante/" + estId);
+            
         } else {
-            // Se ambos vazios, carrega tudo
+            // Nenhum selecionado -> Carrega tudo
             carregarTodas();
         }
     }
 
     @FXML
     public void limparFiltros() {
-        txtFiltroOferta.clear();
-        txtFiltroEstudante.clear();
+        cbFiltroOferta.getSelectionModel().clearSelection();
+        cbFiltroEstudante.getSelectionModel().clearSelection();
         carregarTodas();
     }
 
@@ -96,80 +152,61 @@ public class CoordenadorCandidaturasController {
             tabelaCandidaturas.setItems(lista);
         } catch (Exception e) {
             e.printStackTrace();
-            // Se der erro (ex: ID não existe), limpa a tabela
             tabelaCandidaturas.setItems(FXCollections.observableArrayList());
-            mostrarAlerta(Alert.AlertType.ERROR, "Erro ao carregar dados. Verifique os IDs.");
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro ao carregar dados filtrados.");
         }
     }
 
-    // --- NOVA CANDIDATURA MANUAL ---
-
     @FXML
     public void criarCandidaturaManual() {
-        // Cria um Dialog personalizado
+        
         Dialog<JSONObject> dialog = new Dialog<>();
         dialog.setTitle("Nova Candidatura Manual");
-        dialog.setHeaderText("Insira os IDs para criar a candidatura");
-
+        dialog.setHeaderText("Selecione o Estudante e a Oferta");
         ButtonType btnCriar = new ButtonType("Criar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(btnCriar, ButtonType.CANCEL);
-
+        
         GridPane grid = new GridPane();
         grid.setHgap(10); grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
 
-        TextField txtEstudante = new TextField();
-        txtEstudante.setPromptText("ID do Estudante");
-        TextField txtOferta = new TextField();
-        txtOferta.setPromptText("ID da Oferta");
+        ComboBox<JSONObject> cbEstPopup = new ComboBox<>(cbFiltroEstudante.getItems()); // Reutiliza lista
+        ComboBox<JSONObject> cbOfPopup = new ComboBox<>(cbFiltroOferta.getItems());    // Reutiliza lista
+        cbEstPopup.setConverter(cbFiltroEstudante.getConverter());
+        cbOfPopup.setConverter(cbFiltroOferta.getConverter());
+        cbEstPopup.setPrefWidth(300); cbOfPopup.setPrefWidth(300);
+
         TextArea txtCarta = new TextArea();
         txtCarta.setPromptText("Carta de Motivação");
         txtCarta.setPrefHeight(100);
 
-        grid.add(new Label("Estudante ID:"), 0, 0);
-        grid.add(txtEstudante, 1, 0);
-        grid.add(new Label("Oferta ID:"), 0, 1);
-        grid.add(txtOferta, 1, 1);
-        grid.add(new Label("Carta:"), 0, 2);
-        grid.add(txtCarta, 1, 2);
-
+        grid.add(new Label("Estudante:"), 0, 0); grid.add(cbEstPopup, 1, 0);
+        grid.add(new Label("Oferta:"), 0, 1);    grid.add(cbOfPopup, 1, 1);
+        grid.add(new Label("Carta:"), 0, 2);     grid.add(txtCarta, 1, 2);
+        
         dialog.getDialogPane().setContent(grid);
-
-        // Converte o resultado
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == btnCriar) {
-                JSONObject json = new JSONObject();
-                json.put("estudanteId", txtEstudante.getText());
-                json.put("ofertaId", txtOferta.getText());
-                json.put("carta", txtCarta.getText());
-                return json;
-            }
-            return null;
+        
+        dialog.setResultConverter(btn -> {
+            if (btn == btnCriar && cbEstPopup.getValue() != null && cbOfPopup.getValue() != null) {
+                JSONObject j = new JSONObject();
+                j.put("estudanteId", cbEstPopup.getValue().getString("id"));
+                j.put("ofertaId", cbOfPopup.getValue().getString("id"));
+                j.put("carta", txtCarta.getText());
+                return j;
+            } return null;
         });
 
-        Optional<JSONObject> result = dialog.showAndWait();
-
-        result.ifPresent(dados -> {
+        dialog.showAndWait().ifPresent(dados -> {
             try {
-                String estId = dados.getString("estudanteId");
-                String ofId = dados.getString("ofertaId");
-                String carta = dados.getString("carta");
-
-                String endpoint = String.format("/api/candidaturas?estudanteId=%s&ofertaId=%s", estId, ofId);
-                
-                JSONObject body = new JSONObject();
-                body.put("cartaMotivacao", carta);
-
-                ApiClient.post(endpoint, body);
-                mostrarAlerta(Alert.AlertType.INFORMATION, "Candidatura criada com sucesso!");
-                carregarTodas(); // Atualiza a tabela
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                mostrarAlerta(Alert.AlertType.ERROR, "Erro ao criar candidatura: " + e.getMessage());
-            }
+                String u = "/api/candidaturas?estudanteId=" + dados.getString("estudanteId") + "&ofertaId=" + dados.getString("ofertaId");
+                JSONObject b = new JSONObject(); b.put("cartaMotivacao", dados.getString("carta"));
+                ApiClient.post(u, b);
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso!");
+                carregarTodas();
+            } catch(Exception e) { e.printStackTrace(); mostrarAlerta(Alert.AlertType.ERROR, "Erro: " + e.getMessage()); }
         });
     }
+
 
     // --- AÇÕES DE WORKFLOW (Aprovar/Rejeitar) ---
 
@@ -202,7 +239,7 @@ public class CoordenadorCandidaturasController {
             JSONObject body = new JSONObject();
             if(obs != null) body.put("observacoes", obs);
             ApiClient.post(url, body);
-            aplicarFiltros(); // Recarrega mantendo o filtro atual se houver
+            aplicarFiltros(); 
         } catch (Exception e) { e.printStackTrace(); }
     }
 

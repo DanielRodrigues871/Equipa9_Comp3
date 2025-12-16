@@ -1,65 +1,88 @@
 package com.upt.pt.fx.controller;
 
-import com.upt.pt.SceneManager;
-import com.upt.pt.fx.model.PropostaFX;
-import com.upt.pt.fx.service.ApiClient;
-import com.upt.pt.fx.session.UserSession;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import javafx.collections.ObservableList;
 
+import com.upt.pt.SceneManager;
+import com.upt.pt.fx.service.ApiClient;
+import com.upt.pt.fx.session.UserSession;
+
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+// Repare que já não importamos PropostaFX aqui
 
 public class ListarPropostasController {
 
-    @FXML private TableView<PropostaFX> tabela;
-    @FXML private TableColumn<PropostaFX, String> colTitulo;
-    @FXML private TableColumn<PropostaFX, String> colEstado;
-    @FXML private TableColumn<PropostaFX, Integer> colVagas;
-    @FXML private TableColumn<PropostaFX, Integer> colDuracao;
+    // 1. Mudamos o tipo da Tabela e Colunas para JSONObject
+    @FXML private TableView<JSONObject> tabela;
+    @FXML private TableColumn<JSONObject, String> colTitulo;
+    @FXML private TableColumn<JSONObject, String> colEstado;
+    @FXML private TableColumn<JSONObject, Integer> colVagas;
+    @FXML private TableColumn<JSONObject, Integer> colDuracao;
 
     @FXML
     public void initialize() {
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        colVagas.setCellValueFactory(new PropertyValueFactory<>("vagas"));
-        colDuracao.setCellValueFactory(new PropertyValueFactory<>("duracao"));
-
+        configurarColunas();
         carregar();
+    }
+
+    private void configurarColunas() {
+        // 
+        
+        // Título
+        colTitulo.setCellValueFactory(data -> 
+            new SimpleStringProperty(data.getValue().optString("titulo", "Sem Título")));
+
+        // Estado (Confirme se a API envia "status" ou "estado")
+        colEstado.setCellValueFactory(data -> 
+            new SimpleStringProperty(data.getValue().optString("status", "-")));
+
+        // Vagas (Inteiro)
+        colVagas.setCellValueFactory(data -> 
+            new SimpleIntegerProperty(data.getValue().optInt("numeroVagas", 0)).asObject());
+
+        // Duração (Inteiro)
+        colDuracao.setCellValueFactory(data -> 
+            new SimpleIntegerProperty(data.getValue().optInt("duracaoMeses", 0)).asObject());
     }
 
     private void carregar() {
         try {
             String repId = UserSession.getId();
-
+            
+            // Vai buscar o array à API
             JSONArray arr = ApiClient.getArray("/api/propostas/representante/" + repId);
 
-            ObservableList<PropostaFX> lista = FXCollections.observableArrayList();
+            ObservableList<JSONObject> lista = FXCollections.observableArrayList();
 
-
+            // 2. Simplificação: Não criamos objetos Java, guardamos o JSON direto
             for (int i = 0; i < arr.length(); i++) {
-                JSONObject p = arr.getJSONObject(i);
-
-                lista.add(new PropostaFX(
-                        p.getString("titulo"),
-                        p.getString("estado"),
-                        p.getInt("vagasDisponiveis"),
-                        p.getInt("duracaoMeses")
-                ));
+                lista.add(arr.getJSONObject(i));
             }
 
             tabela.setItems(lista);
 
         } catch (Exception e) {
             e.printStackTrace();
+            mostrarAlerta("Erro ao carregar propostas: " + e.getMessage());
         }
     }
 
     @FXML
     public void voltar() {
         SceneManager.changeScene("dashboard_representante.fxml");
+    }
+
+    private void mostrarAlerta(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(mensagem);
+        alert.show();
     }
 }

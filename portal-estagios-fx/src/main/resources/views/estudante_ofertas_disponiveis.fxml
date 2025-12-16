@@ -27,10 +27,12 @@
 
       <TableView fx:id="tabelaOfertas" VBox.vgrow="ALWAYS">
          <columns>
-            <TableColumn fx:id="colTitulo" prefWidth="250.0" text="Título da Oferta" />
+            <TableColumn fx:id="colTitulo" prefWidth="200.0" text="Título da Oferta" />
             <TableColumn fx:id="colEmpresa" prefWidth="150.0" text="Empresa" />
-            <TableColumn fx:id="colTipo" prefWidth="120.0" text="Tipo" />
+            <TableColumn fx:id="colTipo" prefWidth="100.0" text="Tipo" />
+            
             <TableColumn fx:id="colDuracao" prefWidth="100.0" text="Duração" />
+            
             <TableColumn fx:id="colVagas" prefWidth="80.0" text="Vagas" />
          </columns>
          <columnResizePolicy>

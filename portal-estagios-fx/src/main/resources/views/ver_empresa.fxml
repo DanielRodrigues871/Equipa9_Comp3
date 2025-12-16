@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.VerEmpresaController"
-      spacing="10" alignment="CENTER" padding="20">
+<AnchorPane fx:id="contentPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.upt.pt.fx.controller.VerEmpresaController">
 
-    <Label text="Dados da Empresa" style="-fx-font-size: 20px;"/>
+    <VBox spacing="12" alignment="CENTER_LEFT" padding="20">
+        <Label text="Dados da Empresa" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        
+        <!-- Labels para mostrar dados (não editáveis) -->
+        <Label text="Nome: " fx:id="nomeLabel"/>
+        <Label text="NIF: " fx:id="nifLabel"/>
+        <Label text="Email: " fx:id="emailLabel"/>
+        <Label text="Morada: " fx:id="moradaLabel"/>
+        <Label text="Estado: " fx:id="estadoLabel"/>
 
-    <Label fx:id="nomeLabel"/>
-    <Label fx:id="nifLabel"/>
-    <Label fx:id="areaLabel"/>
-    
-    <Button text="Arquivar empresa" onAction="#arquivarEmpresa"/>
-    <Button text="Voltar" onAction="#voltar"/>
+        <Button text="Voltar" onAction="#voltar"/>
+    </VBox>
 
-</VBox>
+</AnchorPane>

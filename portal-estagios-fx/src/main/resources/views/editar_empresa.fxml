@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.upt.pt.fx.controller.EditarEmpresaController"
-      spacing="10" alignment="CENTER" padding="20">
+<AnchorPane fx:id="contentPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.upt.pt.fx.controller.EditarEmpresaController">
 
-    <Label text="Editar Empresa" style="-fx-font-size: 20px;"/>
+    <VBox spacing="10" alignment="CENTER_LEFT" padding="20">
+        <Label text="Editar Empresa" style="-fx-font-size: 20px;"/>
 
-    <TextField fx:id="nomeField" promptText="Nome"/>
-    <TextField fx:id="areaField" promptText="Área"/>
+        <TextField fx:id="nomeField" promptText="Nome"/>
+        <TextField fx:id="areaField" promptText="Área"/>
 
-    <Label fx:id="errorLabel" textFill="red"/>
+        <Label fx:id="errorLabel" textFill="red"/>
 
-    <Button text="Guardar" onAction="#guardar"/>
-    <Button text="Voltar" onAction="#voltar"/>
+        <Button text="Guardar" onAction="#guardar"/>
+        <Button text="Voltar" onAction="#voltar"/>
+    </VBox>
 
-</VBox>
+</AnchorPane>

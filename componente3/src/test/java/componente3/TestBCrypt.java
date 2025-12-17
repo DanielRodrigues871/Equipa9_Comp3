@@ -7,7 +7,7 @@ public class TestBCrypt {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         
         // Hash que estava no banco (problema)
-        String hashProblema = "$2a$10$0zpSF1jzL8eQSjdES/VY/.13MjebazxmWwl7tB9lLrHqBci3MMUL.";
+        String hashProblema = "$2a$10$0zpSF1jzL8eQSjdES/VY/.13MjebazxmWwl7tB9lLrHqBci3MMUL.$2a$10$Y4A2ucuJCaJbIX5wHlQA6.l4zWuyIBfQN8SUAA1BAFJZ9QJCIEBie";
         String senhaCorreta = "Ronaldo02!";
         
         System.out.println("=== TESTE PARA REPRESENTANTE ===");

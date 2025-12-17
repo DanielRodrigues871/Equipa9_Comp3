@@ -26,7 +26,7 @@
         
         <Pane HBox.hgrow="ALWAYS" /> 
         
-        <Button text="🔄 Atualizar Lista" onAction="#carregar" 
+        <Button text="Atualizar Lista" onAction="#carregar" 
                 style="-fx-cursor: hand; -fx-background-color: #ecf0f1; -fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
     </HBox>
 
@@ -56,7 +56,7 @@
             </font>
         </Button>
 
-        <Button text="✏️ Editar Selecionada" onAction="#editar" 
+        <Button text="Ver Detalhes" onAction="#verDetalhes" 
                 style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
@@ -66,8 +66,8 @@
             </font>
         </Button>
 
-        <Button text="➕ Criar Nova" onAction="#criarNova" 
-                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
+        <Button text="Editar Selecionada" onAction="#editar" 
+                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
@@ -76,6 +76,15 @@
             </font>
         </Button>
 
+        <Button text="Criar Nova" onAction="#criarNova" 
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
     </HBox>
 
 </VBox>

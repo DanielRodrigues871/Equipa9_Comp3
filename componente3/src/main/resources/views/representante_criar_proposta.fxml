@@ -28,11 +28,20 @@
 
     <Label fx:id="errorLabel" textFill="#e74c3c" wrapText="true" style="-fx-font-weight: bold;"/>
 
-    <VBox spacing="5" alignment="CENTER_LEFT">
-        <Label text="Título da Oferta:" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="tituloField" promptText="Ex: Desenvolvedor Fullstack" />
-    </VBox>
+    <!-- LINHA 1: Título + Área -->
+    <HBox spacing="20">
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="Título da Oferta:" style="-fx-font-weight: bold;"/>
+            <TextField fx:id="tituloField" promptText="Ex: Desenvolvedor Fullstack" />
+        </VBox>
 
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="Área:" style="-fx-font-weight: bold;"/>
+            <TextField fx:id="areaField" promptText="Ex: Desenvolvimento de Software" />
+        </VBox>
+    </HBox>
+
+    <!-- LINHA 2: Tipo + Remunerado -->
     <HBox spacing="20">
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Tipo:" style="-fx-font-weight: bold;"/>
@@ -40,11 +49,18 @@
         </VBox>
 
         <VBox spacing="5" HBox.hgrow="ALWAYS">
-            <Label text="Localização:" style="-fx-font-weight: bold;"/>
-            <TextField fx:id="localizacaoField" promptText="Ex: Lisboa / Híbrido" />
+            <Label text="Remunerado:" style="-fx-font-weight: bold;"/>
+            <ComboBox fx:id="remuneradoCombo" maxWidth="Infinity" promptText="Selecione..." />
         </VBox>
     </HBox>
 
+    <!-- LINHA 3: Localização -->
+    <VBox spacing="5" alignment="CENTER_LEFT">
+        <Label text="Localização:" style="-fx-font-weight: bold;"/>
+        <TextField fx:id="localizacaoField" promptText="Ex: Lisboa / Híbrido" />
+    </VBox>
+
+    <!-- LINHA 4: Vagas + Duração -->
     <HBox spacing="20">
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Vagas:" style="-fx-font-weight: bold;"/>
@@ -57,11 +73,13 @@
         </VBox>
     </HBox>
 
+    <!-- Descrição -->
     <VBox spacing="5" alignment="CENTER_LEFT">
         <Label text="Descrição:" style="-fx-font-weight: bold;"/>
         <TextArea fx:id="descricaoArea" prefHeight="80.0" promptText="Descreva as funções do estágio..." wrapText="true"/>
     </VBox>
 
+    <!-- Requisitos -->
     <VBox spacing="5" alignment="CENTER_LEFT">
         <Label text="Requisitos:" style="-fx-font-weight: bold;"/>
         <TextArea fx:id="requisitosArea" prefHeight="60.0" promptText="Ex: Java, SQL, Proatividade..." wrapText="true"/>
@@ -75,7 +93,7 @@
         <Button text="Cancelar" onAction="#voltar" 
                 style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;"/>
         
-        <Button text="✅ Criar Proposta" onAction="#criar" 
+        <Button text="Criar Proposta" onAction="#criar" 
                 style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;"/>
     </HBox>
 

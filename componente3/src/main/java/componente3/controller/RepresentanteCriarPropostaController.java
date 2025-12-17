@@ -3,6 +3,7 @@ package componente3.controller;
 import componente3.SceneManager;
 import componente3.service.ApiClient;
 import componente3.session.UserSession;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.json.JSONObject;
@@ -10,18 +11,17 @@ import org.json.JSONObject;
 public class RepresentanteCriarPropostaController {
 
     @FXML private TextField tituloField;
+    @FXML private TextField areaField;           // NOVO
     @FXML private TextArea descricaoArea;
     @FXML private TextArea requisitosArea;
     @FXML private TextField localizacaoField;
     @FXML private TextField duracaoField;
     @FXML private TextField vagasField;
     @FXML private ComboBox<String> tipoCombo;
+    @FXML private ComboBox<String> remuneradoCombo;  // NOVO
 
     @FXML private Label errorLabel;
 
-    // ==========================
-    //  INITIALIZE
-    // ==========================
     @FXML
     public void initialize() {
         configurarCombos();
@@ -29,28 +29,30 @@ public class RepresentanteCriarPropostaController {
     }
 
     private void configurarCombos() {
-        tipoCombo.getItems().setAll("CURRICULAR", "EXTRA_CURRICULAR");
+        // Tipos completos: CURRICULAR, EXTRACURRICULAR, VERÄO
+        tipoCombo.getItems().setAll("CURRICULAR", "EXTRACURRICULAR", "VERÄO");
         tipoCombo.getSelectionModel().selectFirst();
+
+        // Remunerado: SIM, NÄO
+        remuneradoCombo.getItems().setAll("SIM", "NÄO");
+        remuneradoCombo.getSelectionModel().selectFirst();
     }
 
     private void limparErros() {
         errorLabel.setText("");
     }
 
-    // ==========================
-    //  AÇÕES DO UTILIZADOR
-    // ==========================
     @FXML
     public void criar() {
         limparErros();
 
-        // 1. Validação básica
         if (tituloField.getText().isBlank()
                 || tipoCombo.getValue() == null
+                || remuneradoCombo.getValue() == null
                 || duracaoField.getText().isBlank()
                 || vagasField.getText().isBlank()) {
 
-            errorLabel.setText("Preencha Título, Tipo, Duração e Vagas.");
+            errorLabel.setText("Preencha Título, Tipo, Remunerado, Duração e Vagas.");
             return;
         }
 
@@ -66,17 +68,17 @@ public class RepresentanteCriarPropostaController {
         }
 
         try {
-            // 2. Preparar JSON com os dados da proposta
             JSONObject json = new JSONObject();
             json.put("titulo", tituloField.getText());
+            json.put("area", areaField.getText());              // NOVO
             json.put("descricao", descricaoArea.getText());
             json.put("requisitos", requisitosArea.getText());
             json.put("localizacao", localizacaoField.getText());
             json.put("duracaoMeses", duracao);
             json.put("vagasDisponiveis", vagas);
             json.put("tipo", tipoCombo.getValue());
+            json.put("remunerado", remuneradoCombo.getValue()); // NOVO
 
-            // 3. IDs de empresa e representante (query params)
             String empresaId = UserSession.getEmpresaId();
             String representanteId = UserSession.getId();
 
@@ -85,15 +87,11 @@ public class RepresentanteCriarPropostaController {
                     empresaId, representanteId
             );
 
-            // 4. Enviar ao backend
             JSONObject resposta = ApiClient.post(endpoint, json);
 
-            // 5. Feedback de sucesso (podes validar se veio "id" na resposta)
             if (resposta.has("id")) {
                 errorLabel.setText("Proposta criada com sucesso.");
                 limparFormulario();
-                // se quiseres voltar logo ao dashboard:
-                // SceneManager.changeScene("dashboard_representante.fxml");
             }
 
         } catch (Exception e) {
@@ -105,12 +103,14 @@ public class RepresentanteCriarPropostaController {
     @FXML
     public void limparFormulario() {
         tituloField.clear();
+        areaField.clear();             // NOVO
         descricaoArea.clear();
         requisitosArea.clear();
         localizacaoField.clear();
         duracaoField.clear();
         vagasField.clear();
         tipoCombo.getSelectionModel().selectFirst();
+        remuneradoCombo.getSelectionModel().selectFirst();  // NOVO
         limparErros();
     }
 

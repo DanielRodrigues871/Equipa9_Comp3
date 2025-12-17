@@ -9,13 +9,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RepresentantePropostasController {
 
-    // --- Componentes da Tabela (têm de ter o mesmo fx:id do FXML) ---
     @FXML private TableView<PropostaTabela> tabela;
     @FXML private TableColumn<PropostaTabela, String> colId;
     @FXML private TableColumn<PropostaTabela, String> colTitulo;
@@ -30,7 +32,6 @@ public class RepresentantePropostasController {
     }
 
     private void configurarColunas() {
-        // Liga as colunas aos "Getters" da classe PropostaTabela
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
@@ -42,27 +43,23 @@ public class RepresentantePropostasController {
     public void carregar() {
         try {
             String repId = UserSession.getId();
-            
-            // 1. Buscar dados à API
             JSONArray array = ApiClient.getArray("/api/propostas/representante/" + repId);
 
             ObservableList<PropostaTabela> lista = FXCollections.observableArrayList();
 
-            // 2. Transformar JSON em objetos para a tabela
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);
 
                 PropostaTabela p = new PropostaTabela(
-                    String.valueOf(obj.get("id")),         // Garante String mesmo que venha Int
+                    String.valueOf(obj.get("id")),
                     obj.getString("titulo"),
-                    obj.optString("status", "Pendente"),   // Backend "status" -> Tabela "estado"
+                    obj.optString("status", "Pendente"),
                     String.valueOf(obj.optInt("vagasDisponiveis", 0)),
                     String.valueOf(obj.optInt("duracaoMeses", 0))
                 );
                 lista.add(p);
             }
 
-            // 3. Encher a tabela
             tabela.setItems(lista);
 
         } catch (Exception e) {
@@ -71,9 +68,41 @@ public class RepresentantePropostasController {
         }
     }
 
+    // NOVO: Ver Detalhes da Proposta
+    @FXML
+    public void verDetalhes() {
+        PropostaTabela selecionada = tabela.getSelectionModel().getSelectedItem();
+        if (selecionada == null) {
+            mostrarAlerta("Aviso", "Selecione uma proposta na tabela.");
+            return;
+        }
+
+        try {
+            // Buscar detalhes completos da API usando o ID
+            String repId = UserSession.getId();
+            JSONObject detalhes = ApiClient.getJson("/api/propostas/" + selecionada.getId() + "/representante/" + repId);
+
+            StringBuilder info = new StringBuilder();
+            info.append("ID: ").append(selecionada.getId()).append("\n");
+            info.append("Título: ").append(selecionada.getTitulo()).append("\n");
+            info.append("Estado: ").append(selecionada.getEstado()).append("\n");
+            info.append("Vagas: ").append(selecionada.getVagas()).append("\n");
+            info.append("Duração: ").append(selecionada.getDuracao()).append(" meses\n\n");
+            
+            if (detalhes.has("descricao")) info.append("Descrição: ").append(detalhes.optString("descricao")).append("\n\n");
+            if (detalhes.has("requisitos")) info.append("Requisitos: ").append(detalhes.optString("requisitos")).append("\n");
+            if (detalhes.has("localizacao")) info.append("Localização: ").append(detalhes.optString("localizacao"));
+
+            showDetalhesAlert("Detalhes da Proposta", info.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta("Erro", "Não foi possível carregar os detalhes.");
+        }
+    }
+
     @FXML
     public void editar() {
-        // Pegar o objeto selecionado na linha
         PropostaTabela selecionada = tabela.getSelectionModel().getSelectedItem();
 
         if (selecionada == null) {
@@ -82,10 +111,8 @@ public class RepresentantePropostasController {
         }
 
         try {
-            // Guardar ID na sessão e mudar de ecrã
             UserSession.setPropostaEditarId(selecionada.getId());
             System.out.println("A editar proposta ID: " + selecionada.getId());
-
             SceneManager.changeScene("representante_editar_proposta.fxml");
 
         } catch (Exception e) {
@@ -104,7 +131,6 @@ public class RepresentantePropostasController {
         SceneManager.changeScene("dashboard_representante.fxml");
     }
 
-    // Auxiliar para mostrar mensagens (já que removemos o statusLabel)
     private void mostrarAlerta(String titulo, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -113,9 +139,29 @@ public class RepresentantePropostasController {
         alert.showAndWait();
     }
 
-    // =============================================================
-    // CLASSE MODELO PARA A TABELA (NECESSÁRIA)
-    // =============================================================
+    // NOVO: Alerta expandível para detalhes
+    private void showDetalhesAlert(String titulo, String conteudo) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+
+        TextArea textArea = new TextArea(conteudo);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(textArea, 0, 0);
+
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.getDialogPane().setExpanded(true);
+        alert.showAndWait();
+    }
+
     public static class PropostaTabela {
         private final String id;
         private final String titulo;

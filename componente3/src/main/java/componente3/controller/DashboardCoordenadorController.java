@@ -3,96 +3,104 @@ package componente3.controller;
 import componente3.SceneManager;
 import componente3.session.UserSession;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class DashboardCoordenadorController {
+
+    @FXML
+    private AnchorPane contentPane; // A área central que muda
 
     @FXML
     private Label welcomeLabel;
 
     @FXML
     public void initialize() {
-        welcomeLabel.setText("Bem-vindo, Coordenador " + UserSession.getNome() + "!");
+        if (UserSession.getNome() != null) {
+            welcomeLabel.setText("Bem-vindo, " + UserSession.getNome());
+        }
+    }
+
+    // =======================================================
+    // MÉTODOS LIGADOS AOS BOTÕES DO MENU (onAction)
+    // =======================================================
+
+    @FXML
+    public void showValidarOfertas() {
+        System.out.println("Clicou em Validar Ofertas");
+        loadView("coordenador_validar_ofertas.fxml");
     }
 
     @FXML
-    public void criarOferta() {
-        SceneManager.changeScene("criar_oferta_coordenador.fxml");
-    }
-
-
-    @FXML
-    public void editarOferta() {
-        System.out.println("→ Abrir janela: Editar Oferta");
+    public void showTodasOfertas() {
+        System.out.println("Clicou em Gerir Ofertas");
+        loadView("coordenador_gerir_ofertas.fxml");
     }
 
     @FXML
-    public void eliminarOferta() {
-        System.out.println("→ DELETE /api/ofertas/{id}");
+    public void showCriarOferta() {
+        System.out.println("Clicou em Criar Oferta");
+        loadView("coordenador_criar_oferta.fxml");
     }
 
     @FXML
-    public void listarPendentes() {
-        SceneManager.changeScene("listar_ofertas_pendentes.fxml");
-    }
-
-
-    @FXML
-    public void aprovarOferta() {
-        System.out.println("→ POST /api/ofertas/{id}/aprovar");
+    public void showGestaoCandidaturas() {
+        System.out.println("Clicou em Gerir Candidaturas");
+        loadView("coordenador_candidaturas.fxml");
     }
 
     @FXML
-    public void rejeitarOferta() {
-        System.out.println("→ POST /api/ofertas/{id}/rejeitar");
+    public void showGestaoAcademica() {
+        System.out.println("Clicou em Gestão Académica");
+        loadView("coordenador_academico.fxml");
     }
 
     @FXML
-    public void listarTodas() {
-        System.out.println("→ GET /api/ofertas");
+    public void showEmpresas() {
+        System.out.println("Clicou em Empresas");
+        loadView("coordenador_empresas.fxml");
     }
 
     @FXML
-    public void verCandidaturas() {
-        System.out.println("→ GET /api/candidaturas/oferta/{idOferta}");
+    public void showEstatisticas() {
+        System.out.println("Clicou em Estatísticas");
+        loadView("coordenador_estatisticas.fxml");
     }
-
-    @FXML
-    public void gerirCandidatura() {
-        System.out.println("→ POST /api/candidaturas/{id}/(analise|aprovar|rejeitar)");
-    }
-
-    @FXML
-    public void registarCurso() {
-        SceneManager.changeScene("registar_curso.fxml");
-    }
-
-
-    @FXML
-    public void listarCursos() {
-        SceneManager.changeScene("listar_cursos.fxml");
-    }
-
-
-    @FXML
-    public void menuEmpresas() {
-        System.out.println("menu_empresas.fxml");
-    }
-
-    @FXML
-    public void verEstatisticas() {
-        SceneManager.changeScene("estatisticas.fxml");
-    }
-
-    @FXML
-    public void verNotificacoes() {
-        SceneManager.changeScene("notificacoes.fxml");
-    }
-
 
     @FXML
     public void logout() {
         UserSession.logout();
-        SceneManager.changeScene("welcome.fxml");
+        SceneManager.changeScene("login.fxml");
+    }
+
+    // =======================================================
+    // MÉTODO AUXILIAR PARA TROCAR O CONTEÚDO CENTRAL
+    // =======================================================
+    private void loadView(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/" + fxmlFile));
+            Node view = loader.load();
+            
+            // Limpa o centro e mete a nova vista
+            contentPane.getChildren().setAll(view);
+            
+            // Estica a vista para ocupar o espaço todo
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+            
+        } catch (IOException e) {
+            // Se o ficheiro ainda não existir, mostra o erro na consola mas não crasha a app
+            System.err.println("ERRO: Não foi possível carregar a vista: " + fxmlFile);
+            e.printStackTrace();
+            
+            // Opcional: Mostrar mensagem visual de erro
+            welcomeLabel.setText("Erro: O ecrã '" + fxmlFile + "' ainda não foi criado.");
+        }
     }
 }

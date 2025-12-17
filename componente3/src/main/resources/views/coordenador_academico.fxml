@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="componente3.controller.CoordenadorAcademicoController">
+    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+    
+    <Label text="Gestão Académica" style="-fx-font-weight: bold; -fx-font-size: 24px;">
+        <VBox.margin><Insets bottom="15.0" /></VBox.margin>
+    </Label>
+
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        
+        <Tab text="Estudantes por Curso">
+            <VBox spacing="10.0">
+                <padding><Insets top="15.0" left="10.0" right="10.0"/></padding>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label text="Selecione o Curso:" />
+                    <ComboBox fx:id="cbCursosLista" prefWidth="300.0" onAction="#carregarEstudantes" promptText="Escolha um curso..."/>
+                </HBox>
+                <TableView fx:id="tabelaEstudantes" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNomeEst" text="Nome" prefWidth="200.0"/>
+                        <TableColumn fx:id="colEmailEst" text="Email" prefWidth="200.0"/>
+                        <TableColumn fx:id="colNumEst" text="Nº Estudante" prefWidth="100.0"/>
+                        <TableColumn fx:id="colMedia" text="Média" prefWidth="80.0"/>
+                    </columns>
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                </TableView>
+            </VBox>
+        </Tab>
+
+        <Tab text="Registar Novo Curso">
+            <VBox spacing="15.0" maxWidth="600.0">
+                <padding><Insets top="20.0" left="20.0"/></padding>
+                
+                <Label text="Dados do Novo Curso" style="-fx-font-weight: bold;"/>
+                
+                <TextField fx:id="txtNomeCurso" promptText="Nome do Curso" />
+                <TextField fx:id="txtCodigoCurso" promptText="Código (Ex: EI01)" />
+                <TextField fx:id="txtGrau" promptText="Grau (Licenciatura, Mestrado...)" />
+                
+                <HBox spacing="10.0">
+                    <Label text="Duração (Anos):" />
+                    <Spinner fx:id="spDuracao" editable="true" />
+                </HBox>
+
+                <TextField fx:id="txtDepId" promptText="ID do Departamento" />
+                
+                <Button text="Registar Curso" onAction="#registarCurso" 
+                        style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-cursor: hand;"/>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>

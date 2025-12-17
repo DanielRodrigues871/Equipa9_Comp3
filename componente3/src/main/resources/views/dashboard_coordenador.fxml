@@ -1,35 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="componente3.controller.DashboardCoordenadorController"
-      alignment="CENTER"
-      spacing="12"
-      prefWidth="450"
-      prefHeight="500">
+<BorderPane fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0" 
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="componente3.controller.DashboardCoordenadorController">
 
-    <Label fx:id="welcomeLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+   <left>
+      <VBox prefHeight="720.0" prefWidth="260.0" spacing="10.0" style="-fx-background-color: #2c3e50;">
+         <padding>
+            <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+         </padding>
+         
+         <children>
+            <Label text="PORTAL UPT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            
+            <Label text="Área de Coordenação" textFill="#bdc3c7">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
 
-    <Button text="Criar Oferta" onAction="#criarOferta"/>
-    <Button text="Editar Oferta" onAction="#editarOferta"/>
-    <Button text="Eliminar Oferta" onAction="#eliminarOferta"/>
-    <Button text="Ofertas Pendentes" onAction="#listarPendentes"/>
-    <Button text="Aprovar Oferta" onAction="#aprovarOferta"/>
-    <Button text="Rejeitar Oferta" onAction="#rejeitarOferta"/>
-    <Button text="Listar Todas as Ofertas" onAction="#listarTodas"/>
-    <Button text="Ver Candidaturas de uma Oferta" onAction="#verCandidaturas"/>
-    <Button text="Gerir Candidatura" onAction="#gerirCandidatura"/>
-    <Button text="Registar Curso" onAction="#registarCurso"/>
-    <Button text="Listar Estudantes de um Curso" onAction="#listarEstudantesCurso"/>
-    <Button text="Menu Empresas" onAction="#menuEmpresas"/>
-    <Button text="Estatísticas" onAction="#verEstatisticas"/>
-    <Button text="Notificações" onAction="#verNotificacoes"/>
-    <Button text="Editar Oferta" onAction="#listarParaEditar"/>
-    <Button text="Listar Cursos" onAction="#listarCursos"/>
+            <Separator opacity="0.3" prefWidth="200.0" />
 
-    <Button text="Logout" onAction="#logout"/>
+            <Label text="GESTÃO DE OFERTAS" textFill="#95a5a6">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
 
-</VBox>
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showValidarOfertas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="✅  Validar Pendentes">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showTodasOfertas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="📋  Listar/Editar Ofertas">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+            
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showCriarOferta" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="➕  Criar Nova Oferta">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Label text="CANDIDATURAS &amp; ALUNOS" textFill="#95a5a6">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showGestaoCandidaturas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="   Gerir Candidaturas">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showGestaoAcademica" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="🎓  Cursos e Estudantes">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Label text="OUTROS" textFill="#95a5a6">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showEmpresas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="🏢  Empresas Parceiras">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showEstatisticas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="📊  Estatísticas">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#logout" 
+                    style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 5;" 
+                    text="Terminar Sessão">
+               <padding>
+                  <Insets bottom="12.0" top="12.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+
+         </children>
+      </VBox>
+   </left>
+
+   <center>
+      <AnchorPane fx:id="contentPane" style="-fx-background-color: #ecf0f1;">
+         <children>
+            <VBox alignment="CENTER" layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="welcomeLabel" text="Bem-vindo, Coordenador" textFill="#2c3e50">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="Selecione uma opção no menu lateral para começar." textFill="#7f8c8d">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+
+</BorderPane>

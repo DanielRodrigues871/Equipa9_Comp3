@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="componente3.controller.RepresentanteNotificacoesController">
+
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+
+    <Label text="As Minhas Notificações" textFill="#2c3e50">
+        <font>
+            <Font name="System Bold" size="26.0" />
+        </font>
+    </Label>
+
+    <Label text="Aqui receberá atualizações sobre candidaturas e aprovações." textFill="grey"/>
+
+    <ListView fx:id="listaNotificacoes" VBox.vgrow="ALWAYS" />
+
+    <Button text="Voltar ao Dashboard" onAction="#voltar" 
+            style="-fx-cursor: hand; -fx-background-color: #95a5a6; -fx-text-fill: white;"/>
+
+</VBox>

@@ -11,9 +11,10 @@ public class ApiClient {
     private static final HttpClient CLIENT = HttpClient.newHttpClient();
 
     // ============================
-    // POST com tratamento de erro
+    // POST (Criar / Login)
     // ============================
     public static JSONObject post(String path, JSONObject json) throws Exception {
+        System.out.println("API POST: " + path); 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
                 .header("Content-Type", "application/json")
@@ -21,182 +22,103 @@ public class ApiClient {
                 .build();
 
         HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
+        tratarErro(resp);
         
-        // DEBUG: Mostrar a resposta
-        System.out.println("POST " + path);
-        System.out.println("Status: " + resp.statusCode());
-        System.out.println("Response: " + resp.body());
+        // Proteção contra resposta vazia
+        if (resp.body() == null || resp.body().isBlank()) return new JSONObject();
         
-        // Verificar se é JSON válido
-        String body = resp.body().trim();
-        if (body.isEmpty()) {
-            return new JSONObject();
-        }
-        
-        if (resp.statusCode() >= 400) {
-            // Se for erro, criar um JSON de erro
-            JSONObject errorJson = new JSONObject();
-            errorJson.put("error", true);
-            errorJson.put("status", resp.statusCode());
-            errorJson.put("message", body);
-            return errorJson;
-        }
-        
-        // Tentar parsear como JSON
-        try {
-            return new JSONObject(body);
-        } catch (Exception e) {
-            // Se não for JSON válido, retornar como mensagem
-            JSONObject result = new JSONObject();
-            result.put("message", body);
-            return result;
-        }
+        return new JSONObject(resp.body());
     }
 
     // ============================
-    // GET (objeto) com tratamento de erro
+    // GET ONE (Buscar 1 Objeto - ex: Empresa, Perfil)
     // ============================
-    public static JSONObject getObject(String path) throws Exception {
+    // NOTA: Renomeei de getObject para getJson para bater certo com o Controller
+    public static JSONObject getJson(String path) throws Exception {
+        System.out.println("API GET JSON: " + path);
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
                 .GET()
                 .build();
 
         HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
+        tratarErro(resp);
         
-        // DEBUG: Mostrar a resposta
-        System.out.println("GET " + path);
-        System.out.println("Status: " + resp.statusCode());
-        System.out.println("Response: " + resp.body());
+        if (resp.body() == null || resp.body().isBlank()) return new JSONObject();
         
-        String body = resp.body().trim();
-        if (body.isEmpty()) {
-            return new JSONObject();
-        }
-        
-        if (resp.statusCode() >= 400) {
-            JSONObject errorJson = new JSONObject();
-            errorJson.put("error", true);
-            errorJson.put("status", resp.statusCode());
-            errorJson.put("message", body);
-            return errorJson;
-        }
-        
-        try {
-            return new JSONObject(body);
-        } catch (Exception e) {
-            JSONObject result = new JSONObject();
-            result.put("message", body);
-            return result;
-        }
+        return new JSONObject(resp.body());
     }
 
     // ============================
-    // GET (lista) com tratamento de erro
+    // GET LIST (Buscar Array - ex: Lista de Propostas)
     // ============================
     public static JSONArray getArray(String path) throws Exception {
+        System.out.println("API GET ARRAY: " + path);
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
                 .GET()
                 .build();
 
         HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
-        
-        // DEBUG: Mostrar a resposta
-        System.out.println("GET Array " + path);
-        System.out.println("Status: " + resp.statusCode());
-        System.out.println("Response: " + resp.body());
-        
-        String body = resp.body().trim();
-        if (body.isEmpty()) {
+        tratarErro(resp);
+
+        if (resp.body() == null || resp.body().isBlank()) {
             return new JSONArray();
         }
-        
-        if (resp.statusCode() >= 400) {
-            // Retornar array vazio em caso de erro
-            return new JSONArray();
-        }
-        
+
         try {
-            return new JSONArray(body);
+            return new JSONArray(resp.body());
         } catch (Exception e) {
-            // Se não for array, retornar array vazio
-            return new JSONArray();
+            System.err.println("ERRO: O servidor não devolveu uma lista em " + path);
+            throw e;
         }
     }
 
     // ============================
-    // PUT com tratamento de erro
+    // PUT (Atualizar)
     // ============================
     public static JSONObject put(String path, JSONObject json) throws Exception {
+        System.out.println("API PUT: " + path);
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
                 .header("Content-Type", "application/json")
                 .PUT(HttpRequest.BodyPublishers.ofString(json.toString()))
                 .build();
-
+        
         HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
+        tratarErro(resp);
         
-        System.out.println("PUT " + path);
-        System.out.println("Status: " + resp.statusCode());
-        System.out.println("Response: " + resp.body());
+        if (resp.body() == null || resp.body().isBlank()) return new JSONObject();
         
-        String body = resp.body().trim();
-        if (body.isEmpty()) {
-            return new JSONObject();
-        }
-        
-        if (resp.statusCode() >= 400) {
-            JSONObject errorJson = new JSONObject();
-            errorJson.put("error", true);
-            errorJson.put("status", resp.statusCode());
-            errorJson.put("message", body);
-            return errorJson;
-        }
-        
-        try {
-            return new JSONObject(body);
-        } catch (Exception e) {
-            JSONObject result = new JSONObject();
-            result.put("message", body);
-            return result;
-        }
+        return new JSONObject(resp.body());
     }
 
     // ============================
-    // DELETE com tratamento de erro
+    // DELETE (Apagar)
     // ============================
     public static JSONObject delete(String path) throws Exception {
+        System.out.println("API DELETE: " + path);
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
                 .DELETE()
                 .build();
-
+        
         HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
+        tratarErro(resp); // Se der 404 ou 500, lança erro aqui
         
-        System.out.println("DELETE " + path);
-        System.out.println("Status: " + resp.statusCode());
-        System.out.println("Response: " + resp.body());
+        if (resp.body() == null || resp.body().isBlank()) return new JSONObject();
         
-        String body = resp.body().trim();
-        if (body.isEmpty()) {
-            return new JSONObject();
-        }
-        
-        if (resp.statusCode() >= 400) {
-            JSONObject errorJson = new JSONObject();
-            errorJson.put("error", true);
-            errorJson.put("status", resp.statusCode());
-            errorJson.put("message", body);
-            return errorJson;
-        }
-        
-        try {
-            return new JSONObject(body);
-        } catch (Exception e) {
-            JSONObject result = new JSONObject();
-            result.put("message", body);
-            return result;
+        return new JSONObject(resp.body());
+    }
+    
+    // ============================
+    // AUXILIAR: TRATAMENTO DE ERROS
+    // ============================
+    private static void tratarErro(HttpResponse<String> resp) throws Exception {
+        if (resp.statusCode() >= 300) {
+            System.err.println("❌ ERRO API (" + resp.statusCode() + ")");
+            System.err.println("❌ BODY: " + resp.body());
+            throw new Exception("Erro API " + resp.statusCode() + ": " + resp.body());
         }
     }
 }

@@ -1,7 +1,6 @@
 package componente3.model;
 
 public class EmpresaOption {
-
     private String id;
     private String nome;
 
@@ -18,8 +17,9 @@ public class EmpresaOption {
         return nome;
     }
 
+    // O JavaFX usa este método para decidir o que mostrar na lista
     @Override
     public String toString() {
-        return nome; // é isto que aparece no ComboBox
+        return nome;
     }
 }

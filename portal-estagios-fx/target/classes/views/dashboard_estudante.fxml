@@ -47,9 +47,10 @@
                </VBox.margin>
             </Label>
 
+            <!-- OFERTAS -->
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showOfertasAprovadas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="✅  Ofertas Aprovadas">
+                    text="Ofertas Aprovadas">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -58,7 +59,26 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showCandidatar" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="✍️  Candidatar a Oferta">
+                    text="Candidatar a Oferta">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <!-- PROPOSTAS (NOVO) -->
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showPropostasAprovadas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="Propostas Aprovadas">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showCandidatarProposta" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="Candidatar a Proposta">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -76,7 +96,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showMinhasCandidaturas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="📂  Minhas Candidaturas">
+                    text="Minhas Candidaturas">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -85,7 +105,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showNotificacoes" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="🔔  Notificações">
+                    text="Notificações">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -124,4 +144,5 @@
          </children>
       </AnchorPane>
    </center>
+
 </BorderPane>

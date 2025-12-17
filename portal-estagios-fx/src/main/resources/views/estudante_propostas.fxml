@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,24 +9,24 @@
 <?import javafx.scene.text.Font?>
 
 <VBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.upt.pt.fx.controller.EstudanteOfertasController">
+      fx:controller="com.upt.pt.fx.controller.EstudantePropostasController">
    
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
 
    <children>
-      <Label text="Ofertas de Estágio Disponíveis" style="-fx-text-fill: black;">
+      <Label text="Propostas de Estágio Aprovadas" style="-fx-text-fill: black;">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       
-      <Label text="Selecione uma oferta da lista para ver detalhes ou candidatar-se." textFill="#7f8c8d" />
+      <Label text="Selecione uma proposta da lista para ver detalhes ou candidatar-se." textFill="#7f8c8d" />
 
-      <TableView fx:id="tabelaOfertas" VBox.vgrow="ALWAYS">
+      <TableView fx:id="tabelaPropostas" VBox.vgrow="ALWAYS">
          <columns>
-            <TableColumn fx:id="colTitulo" prefWidth="200.0" text="Título da Oferta" />
+            <TableColumn fx:id="colTitulo" prefWidth="200.0" text="Título da Proposta" />
             <TableColumn fx:id="colEmpresa" prefWidth="150.0" text="Empresa" />
             <TableColumn fx:id="colTipo" prefWidth="100.0" text="Tipo" />
             <TableColumn fx:id="colDuracao" prefWidth="100.0" text="Duração" />
@@ -40,10 +39,10 @@
 
       <HBox spacing="15.0" alignment="CENTER_RIGHT">
          <children>
-             <Button text="Atualizar Lista" onAction="#carregarOfertas" 
+             <Button text="Atualizar Lista" onAction="#carregarPropostas" 
                      style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;" />
                      
-             <Button text="Ver Detalhes da Selecionada" onAction="#verDetalhes" 
+             <Button text="Ver Detalhes" onAction="#verDetalhes" 
                      style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
                 <padding>
                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />

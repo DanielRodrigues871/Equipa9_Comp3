@@ -24,7 +24,7 @@
     </TableView>
 
     <HBox spacing="15.0" alignment="CENTER_RIGHT">
-        <Button text="❌ Rejeitar" onAction="#rejeitarOferta" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
-        <Button text="✅ Aprovar" onAction="#aprovarOferta" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Rejeitar" onAction="#rejeitarOferta" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Aprovar" onAction="#aprovarOferta" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand;"/>
     </HBox>
 </VBox>

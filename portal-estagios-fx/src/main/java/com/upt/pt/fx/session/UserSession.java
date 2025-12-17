@@ -29,11 +29,9 @@ public class UserSession {
     public static String getEmail() { return email; }
     public static String getTipo() { return tipo; }
 
-    // ---------------- EMPRESA ----------------
     public static void setEmpresaId(String empId) { empresaId = empId; }
     public static String getEmpresaId() { return empresaId; }
 
-    // ---------------- OFERTAS & PROPOSTAS ----------------
     public static void setOfertaEditarId(String ofertaId) { ofertaEditarId = ofertaId; }
     public static String getOfertaEditarId() { return ofertaEditarId; }
 
@@ -43,14 +41,12 @@ public class UserSession {
     public static void setOfertaSelecionada(String ofertaId) { ofertaSelecionada = ofertaId; }
     public static String getOfertaSelecionada() { return ofertaSelecionada; }
     
-    // ---------------- CANDIDATURAS & CURSOS ----------------
     public static void setCandidaturaSelecionada(String id) { candidaturaSelecionada = id; }
     public static String getCandidaturaSelecionada() { return candidaturaSelecionada; }
     
     public static void setCursoSelecionado(String id) { cursoSelecionado = id; }
     public static String getCursoSelecionado() { return cursoSelecionado; }
 
-    // ---------------- LOGOUT (LIMPEZA TOTAL) ----------------
     public static void logout() {
         // Limpar dados do utilizador
         id = nome = email = tipo = null;

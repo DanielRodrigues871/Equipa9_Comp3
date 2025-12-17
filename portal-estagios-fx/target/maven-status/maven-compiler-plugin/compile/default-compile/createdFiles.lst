@@ -1,4 +1,3 @@
-com/upt/pt/fx/controller/EditarEmpresaController.class
 com/upt/pt/SceneManager.class
 com/upt/pt/fx/controller/CoordenadorCriarOfertaController$1.class
 com/upt/pt/fx/controller/CoordenadorEmpresasController.class
@@ -18,9 +17,6 @@ com/upt/pt/fx/controller/EstudanteNotificacoesController$1.class
 com/upt/pt/fx/controller/EstudanteOfertasController.class
 com/upt/pt/fx/controller/CoordenadorCandidaturasController.class
 com/upt/pt/PortalFXMain.class
-com/upt/pt/fx/controller/CandidatarController.class
-com/upt/pt/fx/controller/EstatisticasController.class
-com/upt/pt/fx/controller/ConsultarOfertasController.class
 com/upt/pt/fx/controller/CriarPropostaController.class
 com/upt/pt/fx/controller/CoordenadorAcademicoController.class
 com/upt/pt/fx/controller/CoordenadorCandidaturasController$2.class

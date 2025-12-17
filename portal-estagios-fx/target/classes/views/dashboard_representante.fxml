@@ -50,7 +50,7 @@
                 <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
                         onAction="#showCriarProposta"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
-                        text="➕  Criar Proposta">
+                        text="Criar Proposta">
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
@@ -60,7 +60,7 @@
                 <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
                         onAction="#showMinhasPropostas"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
-                        text="📋  Minhas Propostas">
+                        text="Minhas Propostas">
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
@@ -79,7 +79,7 @@
                 <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
                         onAction="#showGestaoEmpresas"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
-                        text="🏢  Gestão de Empresas">
+                        text="Gestão de Empresas">
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
@@ -98,7 +98,7 @@
                 <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false"
                         onAction="#showNotificacoes"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
-                        text="🔔  Notificações">
+                        text="Notificações">
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>

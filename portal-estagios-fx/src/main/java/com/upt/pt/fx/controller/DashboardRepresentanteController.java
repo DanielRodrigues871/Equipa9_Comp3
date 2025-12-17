@@ -25,7 +25,7 @@ public class DashboardRepresentanteController {
         }
     }
 
-    // ====== métodos dos botões do menu ======
+    // métodos dos botões do menu 
 
     @FXML
     public void showCriarProposta() {
@@ -53,7 +53,7 @@ public class DashboardRepresentanteController {
         SceneManager.changeScene("welcome.fxml");        
     }
 
-    // ====== método auxiliar igual ao do coordenador ======
+    // método auxiliar igual ao do coordenador
 
     private void loadView(String fxmlFile) {
         try {

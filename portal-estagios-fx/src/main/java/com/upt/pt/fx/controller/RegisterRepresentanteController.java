@@ -66,7 +66,7 @@ public class RegisterRepresentanteController {
             json.put("password", passwordField.getText());
             json.put("tipo", "REPRESENTANTE");
 
-            // --- MUDANÇA: Usar o ID do objeto selecionado na Combo ---
+            //  Usar o ID do objeto selecionado na Combo
             json.put("empresaId", empresaSelecionada.getId());
             
             json.put("cargo", cargoField.getText());

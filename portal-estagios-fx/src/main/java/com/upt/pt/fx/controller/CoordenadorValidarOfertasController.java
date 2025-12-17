@@ -27,7 +27,7 @@ public class CoordenadorValidarOfertasController {
 
     private void configurarColunas() {
         colTitulo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("titulo", "-")));
-        colEmpresa.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("empresaNome", "-"))); // Ajuste conforme seu DTO
+        colEmpresa.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("empresaNome", "-"))); 
         colTipo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("tipo", "-")));
         colData.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("dataPublicacao", "-")));
     }

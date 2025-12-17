@@ -38,7 +38,7 @@ public class CoordenadorAcademicoController {
         // Configurar Spinner
         spDuracao.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 6, 3));
 
-        // Configurar ComboBox de Cursos (Para mostrar o nome mas guardar o objeto)
+        // Configurar ComboBox de Cursos 
         cbCursosLista.setConverter(new StringConverter<>() {
             @Override public String toString(JSONObject c) { return c != null ? c.optString("nome") : ""; }
             @Override public JSONObject fromString(String s) { return null; }

@@ -55,7 +55,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showValidarOfertas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="✅  Validar Pendentes">
+                    text="Validar Ofertas Pendentes">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -64,7 +64,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showTodasOfertas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="📋  Listar/Editar Ofertas">
+                    text="Listar/Editar Ofertas">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -73,7 +73,34 @@
             
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showCriarOferta" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="➕  Criar Nova Oferta">
+                    text="Criar Nova Oferta">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Label text="GESTÃO DE PROPOSTAS" textFill="#95a5a6">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showValidarPropostas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="Validar Propostas Pendentes">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
+
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showTodasPropostas" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="Listar Propostas">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -91,7 +118,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showGestaoCandidaturas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="   Gerir Candidaturas">
+                    text="Gerir Candidaturas">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -100,7 +127,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showGestaoAcademica" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="🎓  Cursos e Estudantes">
+                    text="Cursos e Estudantes">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -115,10 +142,19 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </Label>
+            
+            <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showNotificacoes" 
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
+                    text="Notificações">
+               <padding>
+                   <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <font><Font size="14.0" /></font>
+            </Button>
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showEmpresas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="🏢  Empresas Parceiras">
+                    text="Empresas Parceiras">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>
@@ -127,7 +163,7 @@
 
             <Button maxWidth="Infinity" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showEstatisticas" 
                     style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" 
-                    text="📊  Estatísticas">
+                    text="Estatísticas">
                <padding>
                    <Insets bottom="10.0" top="10.0" />
                </padding>

@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RepresentanteNotificacoesController {
+public class CoordenadorNotificacoesController {
 
     @FXML private TableView<JSONObject> tabelaNotificacoes;
     @FXML private TableColumn<JSONObject, Boolean> colSelecionar;
@@ -60,7 +60,7 @@ public class RepresentanteNotificacoesController {
         // 3. Mensagem
         colMensagem.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("mensagem", "")));
 
-        // 4. Data (Formatação Robusta)
+        // 4. Data (Blindada contra erros de formato)
         colData.setCellValueFactory(data -> {
             JSONObject json = data.getValue();
             String rawDate = "";
@@ -128,11 +128,8 @@ public class RepresentanteNotificacoesController {
             selectionMap.clear();
             String idUser = UserSession.getId();
             
-            // MUDANÇA AQUI: Aponta para /representante
-            JSONArray jsonArray = ApiClient.getArray("/api/notificacoes/representante/" + idUser);
+            JSONArray jsonArray = ApiClient.getArray("/api/notificacoes/coordenador/" + idUser);
             
-            System.out.println("JSON Rep: " + jsonArray.toString()); // Debug
-
             ObservableList<JSONObject> items = FXCollections.observableArrayList();
             for (int i = 0; i < jsonArray.length(); i++) {
                 items.add(jsonArray.getJSONObject(i));

@@ -17,7 +17,6 @@ public class EmpresaOption {
         return nome;
     }
 
-    // O JavaFX usa este método para decidir o que mostrar na lista
     @Override
     public String toString() {
         return nome;

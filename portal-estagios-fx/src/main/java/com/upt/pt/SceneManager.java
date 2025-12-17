@@ -14,13 +14,11 @@ public class SceneManager {
 
     public static void changeScene(String fxml) {
         try {
-            // Nota: Mantive a sua lógica de caminho "/views/" + fxml
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource("/views/" + fxml));
             Scene scene = new Scene(loader.load());
             
             primaryStage.setScene(scene);
             
-            // --- ADIÇÃO CRUCIAL ---
             // Força a janela a ficar maximizada sempre que troca de página
             primaryStage.setMaximized(true); 
             

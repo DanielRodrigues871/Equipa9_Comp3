@@ -53,21 +53,21 @@ public class LoginController {
 
             UserSession.setUser(id, nome, email, role);
 
-            // =================================================================
-            // 3. LÓGICA PARA RECUPERAR ID DA EMPRESA (CRUCIAL!)
-            // =================================================================
+
+            // 3. LÓGICA PARA RECUPERAR ID DA EMPRESA 
+
             String empresaIdEncontrado = null;
 
-            // Passo A: Tentar ler diretamente da resposta do Login
+            // Tentar ler diretamente da resposta do Login
             if (response.has("companyId")) empresaIdEncontrado = String.valueOf(response.get("companyId"));
             else if (response.has("empresaId")) empresaIdEncontrado = String.valueOf(response.get("empresaId"));
             else if (response.has("empresa_id")) empresaIdEncontrado = String.valueOf(response.get("empresa_id"));
 
-            // Passo B: Se não veio no Login e é Representante, fazer pedido extra à API
+            // Se não veio no Login e é Representante, fazer pedido extra à API
             if ((empresaIdEncontrado == null || empresaIdEncontrado.equals("null")) 
                  && (role.equals("REPRESENTANTE") || role.equals("EMPRESA"))) {
                 
-                System.out.println("⚠️ ID Empresa não veio no login. Tentando buscar perfil do representante...");
+                System.out.println("ID Empresa não veio no login. Tentando buscar perfil do representante...");
                 try {
                     // Faz GET /api/representantes/{idUsuario} para ver os detalhes
                     JSONObject repDetalhes = ApiClient.getJson("/api/representantes/" + id); // ou use endpoint correto da sua API
@@ -80,16 +80,16 @@ public class LoginController {
                         empresaIdEncontrado = String.valueOf(empObj.get("id"));
                     }
                 } catch (Exception ex) {
-                    System.err.println("❌ Falha ao tentar recuperar empresa via API: " + ex.getMessage());
+                    System.err.println("Falha ao tentar recuperar empresa via API: " + ex.getMessage());
                 }
             }
 
-            // Passo C: Guardar na Sessão se encontrou
+            // Guardar na Sessão se encontrou
             if (empresaIdEncontrado != null && !empresaIdEncontrado.equals("null")) {
                 UserSession.setEmpresaId(empresaIdEncontrado);
-                System.out.println("✅ SESSÃO: Empresa ID guardado com sucesso: " + empresaIdEncontrado);
+                System.out.println("SESSÃO: Empresa ID guardado com sucesso: " + empresaIdEncontrado);
             } else {
-                System.err.println("❌ ERRO CRÍTICO: Não foi possível identificar a empresa deste utilizador.");
+                System.err.println("ERRO CRÍTICO: Não foi possível identificar a empresa deste utilizador.");
             }
             // =================================================================
 

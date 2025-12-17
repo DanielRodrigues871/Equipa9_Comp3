@@ -22,15 +22,14 @@ public class CoordenadorCandidaturasController {
     @FXML private TableColumn<JSONObject, String> colData;
     @FXML private TableColumn<JSONObject, String> colEstado;
 
-    // --- ALTERAÇÃO AQUI: Filtros agora são ComboBox ---
     @FXML private ComboBox<JSONObject> cbFiltroOferta;
     @FXML private ComboBox<JSONObject> cbFiltroEstudante;
 
     @FXML
     public void initialize() {
         configurarColunas();
-        configurarFiltros(); // Configura o visual e carrega dados nas combos
-        carregarTodas();     // Carrega a tabela inicial
+        configurarFiltros(); 
+        carregarTodas();    
     }
 
     private void configuringColunas() {
@@ -57,9 +56,9 @@ public class CoordenadorCandidaturasController {
         colEstado.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().optString("estado", "-")));
     }
 
-    // --- NOVO: Configuração das ComboBox de Filtro ---
+    // Configuração das ComboBox de Filtro 
     private void configurarFiltros() {
-        // 1. Converter JSON para Texto Bonito na Oferta
+        // Converter JSON para Texto Bonito na Oferta
         cbFiltroOferta.setConverter(new StringConverter<>() {
             @Override
             public String toString(JSONObject o) {
@@ -73,7 +72,7 @@ public class CoordenadorCandidaturasController {
             @Override public JSONObject fromString(String s) { return null; }
         });
 
-        // 2. Converter JSON para Texto Bonito no Estudante
+        // Converter JSON para Texto Bonito no Estudante
         cbFiltroEstudante.setConverter(new StringConverter<>() {
             @Override
             public String toString(JSONObject e) {
@@ -83,7 +82,7 @@ public class CoordenadorCandidaturasController {
             @Override public JSONObject fromString(String s) { return null; }
         });
 
-        // 3. Carregar dados da API para as combos
+        // Carregar dados da API para as combos
         carregarListasFiltro();
     }
 
@@ -170,8 +169,8 @@ public class CoordenadorCandidaturasController {
         grid.setHgap(10); grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
 
-        ComboBox<JSONObject> cbEstPopup = new ComboBox<>(cbFiltroEstudante.getItems()); // Reutiliza lista
-        ComboBox<JSONObject> cbOfPopup = new ComboBox<>(cbFiltroOferta.getItems());    // Reutiliza lista
+        ComboBox<JSONObject> cbEstPopup = new ComboBox<>(cbFiltroEstudante.getItems());
+        ComboBox<JSONObject> cbOfPopup = new ComboBox<>(cbFiltroOferta.getItems());   
         cbEstPopup.setConverter(cbFiltroEstudante.getConverter());
         cbOfPopup.setConverter(cbFiltroOferta.getConverter());
         cbEstPopup.setPrefWidth(300); cbOfPopup.setPrefWidth(300);

@@ -13,8 +13,6 @@ public class PortalFXMain extends Application {
         SceneManager.setStage(stage);
 
         // 2. Carregar o FXML
-        // Certifique-se que o ficheiro welcome.fxml (o código da resposta anterior)
-        // está guardado dentro de: src/main/resources/views/
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/views/welcome.fxml"));
         
         Scene scene = new Scene(fxml.load());
@@ -23,12 +21,12 @@ public class PortalFXMain extends Application {
         stage.setTitle("Portal de Estágios");
         stage.setScene(scene);
 
-        // --- AQUI ESTÁ A MUDANÇA PARA RESOLUÇÃO DE COMPUTADOR ---
+       
         
-        // Opção A (Recomendada): Abre a janela maximizada (ecrã inteiro)
+        // Abre a janela maximizada (ecrã inteiro)
         stage.setMaximized(true);
         
-        // Opção B (Segurança): Define um tamanho mínimo para evitar que a janela fique demasiado pequena
+        // Define um tamanho mínimo para evitar que a janela fique demasiado pequena
         stage.setMinWidth(1024);
         stage.setMinHeight(720);
 
@@ -44,3 +42,9 @@ public class PortalFXMain extends Application {
 /*
 @../images/Gemini_Generated_Image_9m5poe9m5poe9m5p.png
 */
+
+/*
+ * UPDATE utilizador 
+ * SET password = '$2a$10$WOr2.pQp59bwUC8vv/BM5.4DQRfZe3qLM5CFLnlWZ/tzw6VWI8lN6' 
+ * WHERE email = 'jose@upt.pt';
+ */

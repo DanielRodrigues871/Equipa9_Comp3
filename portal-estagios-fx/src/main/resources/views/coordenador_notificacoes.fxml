@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.upt.pt.fx.controller.EstudanteNotificacoesController">
+      fx:controller="com.upt.pt.fx.controller.CoordenadorNotificacoesController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
     <children>
         <HBox alignment="CENTER_LEFT" spacing="10.0">
-            <Label text="As minhas Notificações" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
+            <Label text="Notificações da Coordenação" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
             <Region HBox.hgrow="ALWAYS" />
             <Button text="Atualizar Lista" onAction="#atualizar" 
                     style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;" />

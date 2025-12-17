@@ -26,9 +26,7 @@ public class DashboardEstudanteController {
         }
     }
 
-    // =======================================================
     // MÉTODOS DOS BOTÕES (onAction)
-    // =======================================================
 
     @FXML
     public void showOfertasAprovadas() {
@@ -38,10 +36,23 @@ public class DashboardEstudanteController {
 
     @FXML
     public void showCandidatar() {
-        System.out.println("Botão clicado: Candidatar");
-        // Pode redirecionar para a mesma lista de ofertas
+        System.out.println("Botão clicado: Candidatar a Oferta");
         loadView("estudante_ofertas_disponiveis.fxml");
     }
+
+    // *** NOVOS MÉTODOS PARA PROPOSTAS ***
+    @FXML
+    public void showPropostasAprovadas() {
+        System.out.println("Botão clicado: Propostas Aprovadas");
+        loadView("estudante_propostas_aprovadas.fxml");
+    }
+
+    @FXML
+    public void showCandidatarProposta() {
+        System.out.println("Botão clicado: Candidatar a Proposta");
+        loadView("estudante_propostas_aprovadas.fxml");
+    }
+    // ************************************
 
     @FXML
     public void showMinhasCandidaturas() {
@@ -62,9 +73,8 @@ public class DashboardEstudanteController {
         SceneManager.changeScene("login.fxml");
     }
 
-    // =======================================================
     // MÉTODO PARA TROCAR O ECRÃ CENTRAL
-    // =======================================================
+    
     private void loadView(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/" + fxmlFile));

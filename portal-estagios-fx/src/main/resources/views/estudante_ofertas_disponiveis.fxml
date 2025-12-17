@@ -30,9 +30,7 @@
             <TableColumn fx:id="colTitulo" prefWidth="200.0" text="Título da Oferta" />
             <TableColumn fx:id="colEmpresa" prefWidth="150.0" text="Empresa" />
             <TableColumn fx:id="colTipo" prefWidth="100.0" text="Tipo" />
-            
             <TableColumn fx:id="colDuracao" prefWidth="100.0" text="Duração" />
-            
             <TableColumn fx:id="colVagas" prefWidth="80.0" text="Vagas" />
          </columns>
          <columnResizePolicy>
@@ -45,6 +43,13 @@
              <Button text="Atualizar Lista" onAction="#carregarOfertas" 
                      style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand;" />
                      
+             <Button text="Ver Detalhes da Selecionada" onAction="#verDetalhes" 
+                     style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
+                <padding>
+                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                </padding>
+             </Button>
+             
              <Button text="Candidatar-me à Selecionada" onAction="#candidatar" 
                      style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
                 <padding>

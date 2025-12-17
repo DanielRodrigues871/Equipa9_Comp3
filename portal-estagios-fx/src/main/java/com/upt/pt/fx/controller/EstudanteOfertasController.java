@@ -1,5 +1,6 @@
 package com.upt.pt.fx.controller;
 
+import com.upt.pt.SceneManager;
 import com.upt.pt.fx.service.ApiClient;
 import com.upt.pt.fx.session.UserSession;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,7 +37,7 @@ public class EstudanteOfertasController {
         colTitulo.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue().optString("titulo", "Sem Título")));
 
-        // 2. Empresa (DTO: empresaNome - CORREÇÃO AQUI)
+        // 2. Empresa (DTO: empresaNome)
         colEmpresa.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue().optString("empresaNome", "Anónimo")));
 
@@ -53,11 +57,7 @@ public class EstudanteOfertasController {
     @FXML
     public void carregarOfertas() {
         try {
-            // Chamamos o endpoint que filtra por status APROVADA
-            // Certifique-se que tem ofertas com status 'APROVADA' na BD
             JSONArray jsonArray = ApiClient.getArray("/api/ofertas/status/APROVADO");
-            
-            // DEBUG: Ver o que chega
             System.out.println("Ofertas recebidas: " + jsonArray.length());
 
             ObservableList<JSONObject> lista = FXCollections.observableArrayList();
@@ -82,22 +82,13 @@ public class EstudanteOfertasController {
         }
 
         try {
-            // IDs
-            String ofertaId = ofertaSelecionada.getString("id"); // ou .optString("id")
+            String ofertaId = ofertaSelecionada.getString("id");
             String estudanteId = UserSession.getId(); 
 
-            // --- CORREÇÃO AQUI ---
-            // O seu Controller exige RequestParam (?estudanteId=...&ofertaId=...)
-            // e também exige um Body (CandidaturaDTO), mesmo que vá vazio.
-            
             String endpoint = String.format("/api/candidaturas?estudanteId=%s&ofertaId=%s", 
                                             estudanteId, ofertaId);
             
-            // Enviamos um JSON vazio porque o @RequestBody é obrigatório no Spring, 
-            // mas os dados importantes vão na URL.
             JSONObject jsonBody = new JSONObject(); 
-            
-            // Envia candidatura
             JSONObject response = ApiClient.post(endpoint, jsonBody);
 
             if (response.has("id")) {
@@ -112,11 +103,60 @@ public class EstudanteOfertasController {
         }
     }
 
+    // Ver Detalhes da Oferta Selecionada
+    @FXML
+    public void verDetalhes() {
+        JSONObject selecionada = tabelaOfertas.getSelectionModel().getSelectedItem();
+        if (selecionada == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Atenção", "Selecione uma oferta primeiro.");
+            return;
+        }
+
+        StringBuilder detalhes = new StringBuilder();
+        detalhes.append("Título: ").append(selecionada.optString("titulo")).append("\n");
+        detalhes.append("Empresa: ").append(selecionada.optString("empresaNome", "N/A")).append("\n");
+        detalhes.append("Tipo: ").append(selecionada.optString("tipo")).append("\n");
+        detalhes.append("Duração: ").append(selecionada.optInt("duracaoMeses")).append(" meses\n");
+        detalhes.append("Vagas: ").append(selecionada.optInt("numeroVagas")).append("\n");
+        detalhes.append("Descrição: ").append(selecionada.optString("descricao", "Sem descrição."));
+
+        showDetalhesAlert("Detalhes da Oferta", detalhes.toString());
+    }
+
+    // Voltar ao Dashboard
+    @FXML
+    public void voltarDashboard() {
+        SceneManager.changeScene("dashboard_estudante.fxml");
+    }
+
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
+
+    // Alerta expandível para detalhes longos
+    private void showDetalhesAlert(String titulo, String conteudo) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+
+        TextArea textArea = new TextArea(conteudo);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(textArea, 0, 0);
+
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.getDialogPane().setExpanded(true);
         alert.showAndWait();
     }
 }

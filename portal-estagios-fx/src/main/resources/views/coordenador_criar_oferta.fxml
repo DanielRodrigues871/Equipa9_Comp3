@@ -29,6 +29,7 @@
          </VBox.margin>
       </Label>
 
+      <!-- LINHA 1: Título + Área -->
       <HBox spacing="20.0">
          <VBox HBox.hgrow="ALWAYS" spacing="5.0">
              <Label text="Título da Oferta" style="-fx-font-weight: bold;"/>
@@ -36,17 +37,34 @@
          </VBox>
          
          <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+             <Label text="Área de Estágio" style="-fx-font-weight: bold;"/>
+             <TextField fx:id="txtArea" promptText="Ex: Desenvolvimento de Software" />
+         </VBox>
+      </HBox>
+
+      <!-- LINHA 2: Empresa -->
+      <HBox spacing="20.0">
+         <VBox HBox.hgrow="ALWAYS" spacing="5.0">
              <Label text="Empresa Parceira" style="-fx-font-weight: bold;"/>
              <ComboBox fx:id="cbEmpresa" maxWidth="Infinity" promptText="Selecione a empresa..." />
          </VBox>
       </HBox>
 
+      <!-- LINHA 3: Tipo + Localização -->
       <HBox spacing="20.0">
          <VBox HBox.hgrow="ALWAYS" spacing="5.0">
              <Label text="Tipo de Estágio" style="-fx-font-weight: bold;"/>
              <ComboBox fx:id="cbTipo" maxWidth="Infinity" />
          </VBox>
          
+         <VBox HBox.hgrow="ALWAYS" spacing="5.0">
+             <Label text="Localização" style="-fx-font-weight: bold;"/>
+             <TextField fx:id="txtLocalizacao" promptText="Ex: Lisboa, Porto, Remoto" />
+         </VBox>
+      </HBox>
+
+      <!-- LINHA 4: Duração + Vagas -->
+      <HBox spacing="20.0">
          <VBox spacing="5.0">
              <Label text="Duração (Meses)" style="-fx-font-weight: bold;"/>
              <Spinner fx:id="spDuracao" editable="true" prefWidth="120.0" />
@@ -58,6 +76,7 @@
          </VBox>
       </HBox>
 
+      <!-- LINHA 5: Datas -->
       <HBox spacing="20.0">
          <VBox HBox.hgrow="ALWAYS" spacing="5.0">
              <Label text="Data de Início" style="-fx-font-weight: bold;"/>
@@ -70,9 +89,16 @@
          </VBox>
       </HBox>
 
+      <!-- LINHA 6: Descrição -->
+      <VBox spacing="5.0">
+          <Label text="Descrição da Oferta" style="-fx-font-weight: bold;"/>
+          <TextArea fx:id="txtDescricao" wrapText="true" promptText="Descreva as funções e atividades do estágio..." />
+      </VBox>
+
+      <!-- LINHA 7: Requisitos -->
       <VBox spacing="5.0" VBox.vgrow="ALWAYS">
-          <Label text="Descrição Detalhada / Requisitos" style="-fx-font-weight: bold;"/>
-          <TextArea fx:id="txtDescricao" wrapText="true" promptText="Descreva as funções, tecnologias e requisitos..." VBox.vgrow="ALWAYS"/>
+          <Label text="Requisitos" style="-fx-font-weight: bold;"/>
+          <TextArea fx:id="txtRequisitos" wrapText="true" promptText="Liste os requisitos, tecnologias, competências..." VBox.vgrow="ALWAYS"/>
       </VBox>
 
       <HBox alignment="CENTER_RIGHT" spacing="15.0">
@@ -84,6 +110,5 @@
              </padding>
           </Button>
       </HBox>
-
    </children>
 </VBox>

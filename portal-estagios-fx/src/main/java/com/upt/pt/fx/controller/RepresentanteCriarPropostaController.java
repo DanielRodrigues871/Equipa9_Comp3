@@ -9,113 +9,117 @@ import org.json.JSONObject;
 
 public class RepresentanteCriarPropostaController {
 
-    @FXML private TextField tituloField;
-    @FXML private TextArea descricaoArea;
-    @FXML private TextArea requisitosArea;
-    @FXML private TextField localizacaoField;
-    @FXML private TextField duracaoField;
-    @FXML private TextField vagasField;
-    @FXML private ComboBox<String> tipoCombo;
+	@FXML
+	private TextField tituloField;
+	@FXML
+	private TextField areaField; 
+	@FXML
+	private TextArea descricaoArea;
+	@FXML
+	private TextArea requisitosArea;
+	@FXML
+	private TextField localizacaoField;
+	@FXML
+	private TextField duracaoField;
+	@FXML
+	private TextField vagasField;
+	@FXML
+	private ComboBox<String> tipoCombo;
+	@FXML
+	private ComboBox<String> remuneradoCombo; 
 
-    @FXML private Label errorLabel;
+	@FXML
+	private Label errorLabel;
 
-    // ==========================
-    //  INITIALIZE
-    // ==========================
-    @FXML
-    public void initialize() {
-        configurarCombos();
-        limparErros();
-    }
+	@FXML
+	public void initialize() {
+		configurarCombos();
+		limparErros();
+	}
 
-    private void configurarCombos() {
-        tipoCombo.getItems().setAll("CURRICULAR", "EXTRA_CURRICULAR");
-        tipoCombo.getSelectionModel().selectFirst();
-    }
+	private void configurarCombos() {
+		// Tipos completos: CURRICULAR, EXTRACURRICULAR, VERÃO
+		tipoCombo.getItems().setAll("CURRICULAR", "EXTRACURRICULAR", "VERÃO");
+		tipoCombo.getSelectionModel().selectFirst();
 
-    private void limparErros() {
-        errorLabel.setText("");
-    }
+		// Remunerado: SIM, NÃO
+		remuneradoCombo.getItems().setAll("SIM", "NÃO");
+		remuneradoCombo.getSelectionModel().selectFirst();
+	}
 
-    // ==========================
-    //  AÇÕES DO UTILIZADOR
-    // ==========================
-    @FXML
-    public void criar() {
-        limparErros();
+	private void limparErros() {
+		errorLabel.setText("");
+	}
 
-        // 1. Validação básica
-        if (tituloField.getText().isBlank()
-                || tipoCombo.getValue() == null
-                || duracaoField.getText().isBlank()
-                || vagasField.getText().isBlank()) {
+	@FXML
+	public void criar() {
+		limparErros();
 
-            errorLabel.setText("Preencha Título, Tipo, Duração e Vagas.");
-            return;
-        }
+		if (tituloField.getText().isBlank() || tipoCombo.getValue() == null || remuneradoCombo.getValue() == null
+				|| duracaoField.getText().isBlank() || vagasField.getText().isBlank()) {
 
-        int duracao;
-        int vagas;
+			errorLabel.setText("Preencha Título, Tipo, Remunerado, Duração e Vagas.");
+			return;
+		}
 
-        try {
-            duracao = Integer.parseInt(duracaoField.getText());
-            vagas = Integer.parseInt(vagasField.getText());
-        } catch (NumberFormatException nfe) {
-            errorLabel.setText("Duração e Vagas têm de ser números inteiros.");
-            return;
-        }
+		int duracao;
+		int vagas;
 
-        try {
-            // 2. Preparar JSON com os dados da proposta
-            JSONObject json = new JSONObject();
-            json.put("titulo", tituloField.getText());
-            json.put("descricao", descricaoArea.getText());
-            json.put("requisitos", requisitosArea.getText());
-            json.put("localizacao", localizacaoField.getText());
-            json.put("duracaoMeses", duracao);
-            json.put("vagasDisponiveis", vagas);
-            json.put("tipo", tipoCombo.getValue());
+		try {
+			duracao = Integer.parseInt(duracaoField.getText());
+			vagas = Integer.parseInt(vagasField.getText());
+		} catch (NumberFormatException nfe) {
+			errorLabel.setText("Duração e Vagas têm de ser números inteiros.");
+			return;
+		}
 
-            // 3. IDs de empresa e representante (query params)
-            String empresaId = UserSession.getEmpresaId();
-            String representanteId = UserSession.getId();
+		try {
+			JSONObject json = new JSONObject();
+			json.put("titulo", tituloField.getText());
+			json.put("area", areaField.getText()); 
+			json.put("descricao", descricaoArea.getText());
+			json.put("requisitos", requisitosArea.getText());
+			json.put("localizacao", localizacaoField.getText());
+			json.put("duracaoMeses", duracao);
+			json.put("vagasDisponiveis", vagas);
+			json.put("tipo", tipoCombo.getValue());
+			json.put("remunerado", remuneradoCombo.getValue()); 
 
-            String endpoint = String.format(
-                    "/api/propostas?empresaId=%s&representanteId=%s",
-                    empresaId, representanteId
-            );
+			String empresaId = UserSession.getEmpresaId();
+			String representanteId = UserSession.getId();
 
-            // 4. Enviar ao backend
-            JSONObject resposta = ApiClient.post(endpoint, json);
+			String endpoint = String.format("/api/propostas?empresaId=%s&representanteId=%s", empresaId,
+					representanteId);
 
-            // 5. Feedback de sucesso (podes validar se veio "id" na resposta)
-            if (resposta.has("id")) {
-                errorLabel.setText("Proposta criada com sucesso.");
-                limparFormulario();
-                // se quiseres voltar logo ao dashboard:
-                // SceneManager.changeScene("dashboard_representante.fxml");
-            }
+			JSONObject resposta = ApiClient.post(endpoint, json);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorLabel.setText("Erro ao criar proposta.");
-        }
-    }
+			if (resposta.has("id")) {
+				errorLabel.setText("Proposta criada com sucesso.");
+				limparFormulario();
+			}
 
-    @FXML
-    public void limparFormulario() {
-        tituloField.clear();
-        descricaoArea.clear();
-        requisitosArea.clear();
-        localizacaoField.clear();
-        duracaoField.clear();
-        vagasField.clear();
-        tipoCombo.getSelectionModel().selectFirst();
-        limparErros();
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorLabel.setText("Erro ao criar proposta.");
+		}
+	}
 
-    @FXML
-    public void voltar() {
-        SceneManager.changeScene("dashboard_representante.fxml");
-    }
+	@FXML
+	public void limparFormulario() {
+		tituloField.clear();
+		areaField.clear(); // NOVO
+		descricaoArea.clear();
+		requisitosArea.clear();
+		localizacaoField.clear();
+		duracaoField.clear();
+		vagasField.clear();
+		tipoCombo.getSelectionModel().selectFirst();
+		remuneradoCombo.getSelectionModel().selectFirst(); // NOVO
+		limparErros();
+	}
+
+	@FXML
+	public void voltar() {
+		SceneManager.changeScene("dashboard_representante.fxml");
+	}
 }

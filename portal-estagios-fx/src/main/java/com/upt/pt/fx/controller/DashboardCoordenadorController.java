@@ -25,10 +25,9 @@ public class DashboardCoordenadorController {
         }
     }
 
-    // =======================================================
     // MÉTODOS LIGADOS AOS BOTÕES DO MENU (onAction)
-    // =======================================================
 
+    // --- GESTÃO DE OFERTAS ---
     @FXML
     public void showValidarOfertas() {
         System.out.println("Clicou em Validar Ofertas");
@@ -47,6 +46,22 @@ public class DashboardCoordenadorController {
         loadView("coordenador_criar_oferta.fxml");
     }
 
+    // --- GESTÃO DE PROPOSTAS (ATUALIZADO) ---
+    @FXML
+    public void showValidarPropostas() {
+        System.out.println("Clicou em Validar Propostas");
+        // Aponta para o ecrã que tem os botões Aprovar/Rejeitar
+        loadView("coordenador_validar_propostas.fxml"); 
+    }
+
+    @FXML
+    public void showTodasPropostas() {
+        System.out.println("Clicou em Listar Propostas");
+        // Aponta para o ecrã de histórico/consulta geral
+        loadView("coordenador_gerir_propostas.fxml"); 
+    }
+
+    // --- GESTÃO DE CANDIDATURAS & ACADÉMICA ---
     @FXML
     public void showGestaoCandidaturas() {
         System.out.println("Clicou em Gerir Candidaturas");
@@ -57,6 +72,13 @@ public class DashboardCoordenadorController {
     public void showGestaoAcademica() {
         System.out.println("Clicou em Gestão Académica");
         loadView("coordenador_academico.fxml");
+    }
+
+    // --- OUTROS ---
+    @FXML
+    public void showNotificacoes() {
+        System.out.println("Clicou em Notificações");
+        loadView("coordenador_notificacoes.fxml");
     }
 
     @FXML
@@ -77,9 +99,7 @@ public class DashboardCoordenadorController {
         SceneManager.changeScene("login.fxml");
     }
 
-    // =======================================================
     // MÉTODO AUXILIAR PARA TROCAR O CONTEÚDO CENTRAL
-    // =======================================================
     private void loadView(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/" + fxmlFile));
@@ -95,12 +115,12 @@ public class DashboardCoordenadorController {
             AnchorPane.setRightAnchor(view, 0.0);
             
         } catch (IOException e) {
-            // Se o ficheiro ainda não existir, mostra o erro na consola mas não crasha a app
             System.err.println("ERRO: Não foi possível carregar a vista: " + fxmlFile);
             e.printStackTrace();
             
-            // Opcional: Mostrar mensagem visual de erro
-            welcomeLabel.setText("Erro: O ecrã '" + fxmlFile + "' ainda não foi criado.");
+            if (welcomeLabel != null) {
+                welcomeLabel.setText("Erro: O ecrã '" + fxmlFile + "' ainda não foi criado.");
+            }
         }
     }
 }

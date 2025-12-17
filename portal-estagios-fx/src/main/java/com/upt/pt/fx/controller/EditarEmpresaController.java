@@ -20,12 +20,20 @@ public class EditarEmpresaController {
 
     private void carregarDados() {
         try {
-            JSONObject emp = ApiClient.getObject("/api/empresas/" + UserSession.getEmpresaId());
-            nomeField.setText(emp.getString("nome"));
-            areaField.setText(emp.getString("area"));
-        }
-        catch (Exception e) {
-            errorLabel.setText("Erro ao carregar dados.");
+            String empId = UserSession.getEmpresaId();
+            
+            // 
+            JSONObject emp = ApiClient.getJson("/api/empresas/" + empId);
+            
+            // 
+            nomeField.setText(emp.optString("nome", ""));
+            
+            // 
+            areaField.setText(emp.optString("areaAtuacao", "")); 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("Erro ao carregar dados: " + e.getMessage());
         }
     }
 
@@ -34,19 +42,23 @@ public class EditarEmpresaController {
         try {
             JSONObject json = new JSONObject();
             json.put("nome", nomeField.getText());
-            json.put("area", areaField.getText());
+            // 
+            json.put("areaAtuacao", areaField.getText()); 
 
+            // 
             ApiClient.put("/api/empresas/" + UserSession.getEmpresaId(), json);
 
-            SceneManager.changeScene("menu_empresas.fxml");
-        }
-        catch (Exception e) {
-            errorLabel.setText("Erro ao guardar.");
+            SceneManager.changeScene("representante_empresas.fxml"); 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("Erro ao guardar: " + e.getMessage());
         }
     }
 
     @FXML
     public void voltar() {
-        SceneManager.changeScene("menu_empresas.fxml");
+        // Redireciona para o ecrã anterior
+        SceneManager.changeScene("representante_empresas.fxml");
     }
 }

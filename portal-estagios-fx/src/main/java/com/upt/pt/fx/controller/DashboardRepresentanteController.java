@@ -29,28 +29,28 @@ public class DashboardRepresentanteController {
 
     @FXML
     public void showCriarProposta() {
-        loadView("representante_criar_proposta.fxml");   // ou criar_proposta.fxml se mantiveres esse nome
+        loadView("representante_criar_proposta.fxml");  
     }
 
     @FXML
     public void showMinhasPropostas() {
-        loadView("representante_propostas.fxml");        // ou listar_propostas.fxml
+        loadView("representante_propostas.fxml");        
     }
 
     @FXML
     public void showGestaoEmpresas() {
-        loadView("representante_empresas.fxml");         // ecrã onde fazes gestão de empresas do representante
+        loadView("representante_empresa.fxml");        
     }
 
     @FXML
     public void showNotificacoes() {
-        loadView("representante_notificacoes.fxml");     // ou notificacoes.fxml
+        loadView("representante_notificacoes.fxml");     
     }
 
     @FXML
     public void logout() {
         UserSession.logout();
-        SceneManager.changeScene("welcome.fxml");        // ou login.fxml, conforme o resto da app
+        SceneManager.changeScene("welcome.fxml");        
     }
 
     // ====== método auxiliar igual ao do coordenador ======

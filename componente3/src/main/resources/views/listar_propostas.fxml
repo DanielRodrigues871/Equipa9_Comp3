@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="componente3.controller.ListarPropostasController"
+      spacing="15" padding="20" alignment="CENTER">
+
+    <TableView fx:id="tabela" prefWidth="700">
+
+        <columns>
+            <TableColumn fx:id="colTitulo" text="Título" />
+            <TableColumn fx:id="colEstado" text="Estado" />
+            <TableColumn fx:id="colVagas" text="Vagas" />
+            <TableColumn fx:id="colDuracao" text="Duração" />
+        </columns>
+
+    </TableView>
+
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="componente3.controller.CriarPropostaController"
+      spacing="10" alignment="CENTER" padding="20">
+
+    <Label text="Criar Proposta de Estágio" style="-fx-font-size: 20px;"/>
+
+    <TextField fx:id="tituloField" promptText="Título"/>
+    <TextArea fx:id="descricaoArea" promptText="Descrição"/>
+    <TextArea fx:id="requisitosArea" promptText="Requisitos"/>
+    <TextField fx:id="localizacaoField" promptText="Localização"/>
+    <TextField fx:id="duracaoField" promptText="Duração (meses)"/>
+    <TextField fx:id="vagasField" promptText="Vagas disponíveis"/>
+    <ComboBox fx:id="tipoCombo" promptText="Tipo (CURRICULAR / EXTRA_CURRICULAR)"/>
+
+    <Label fx:id="errorLabel" textFill="red"/>
+
+    <Button text="Criar" onAction="#criar"/>
+    <Button text="Voltar" onAction="#voltar"/>
+
+</VBox>

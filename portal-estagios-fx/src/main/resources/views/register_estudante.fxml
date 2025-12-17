@@ -54,13 +54,13 @@
                            </VBox.margin>
                         </Label>
 
-                        <TextField fx:id="nomeField" promptText="Nome Completo" prefHeight="40.0" 
+                        <TextField fx:id="nomeField" promptText="Nome Completo (Ex: João Silva)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
                         
-                        <TextField fx:id="emailField" promptText="Email Institucional" prefHeight="40.0" 
+                        <TextField fx:id="emailField" promptText="Email Institucional (Ex: aluno@upt.pt)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
                         
-                        <PasswordField fx:id="passwordField" promptText="Password" prefHeight="40.0" 
+                        <PasswordField fx:id="passwordField" promptText="Password (Ex: Pass123#)" prefHeight="40.0" 
                                        style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
 
                         <Label alignment="CENTER_LEFT" maxWidth="Infinity" text="Dados Académicos" 
@@ -73,9 +73,8 @@
                         <TextField fx:id="numeroEstudanteField" promptText="Número de Estudante (Ex: 2023001)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
 
-                        <TextField fx:id="cursoIdField" promptText="ID do Curso" prefHeight="40.0" 
-                                   style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
-                                   <ComboBox fx:id="cursoCombo" prefWidth="250" promptText="Curso"/>
+                        <ComboBox fx:id="cursoCombo" maxWidth="Infinity" promptText="Selecione o Curso" prefHeight="40.0"
+                                  style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;"/>
                         
                         <TextField fx:id="anoMatriculaField" promptText="Ano de Matrícula (Ex: 2023)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
@@ -54,13 +55,13 @@
                            </VBox.margin>
                         </Label>
 
-                        <TextField fx:id="nomeField" promptText="Nome Completo" prefHeight="40.0" 
+                        <TextField fx:id="nomeField" promptText="Nome Completo (Ex: Carlos Mendes)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
                         
-                        <TextField fx:id="emailField" promptText="Email Institucional" prefHeight="40.0" 
+                        <TextField fx:id="emailField" promptText="Email Institucional (Ex: carlos@upt.pt)" prefHeight="40.0" 
                                    style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
                         
-                        <PasswordField fx:id="passwordField" promptText="Password" prefHeight="40.0" 
+                        <PasswordField fx:id="passwordField" promptText="Password (Ex: Pass123#)" prefHeight="40.0" 
                                        style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
 
                         <Label alignment="CENTER_LEFT" maxWidth="Infinity" text="Dados do Departamento" 
@@ -70,9 +71,8 @@
                            </VBox.margin>
                         </Label>
 
-                        <TextField fx:id="departamentoIdField" promptText="ID do Departamento" prefHeight="40.0" 
-                        <ComboBox fx:id="departamentoCombo" prefWidth="250" promptText="Departamento"/>
-                                   style="-fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black;" />
+                        <ComboBox fx:id="departamentoCombo" maxWidth="Infinity" promptText="Selecione o Departamento" prefHeight="40.0"
+                                  style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-text-fill: black; -fx-font-size: 13px;" />
 
                         <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#registar" 
                                 style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand; -fx-font-weight: bold; -fx-font-size: 14px;" 

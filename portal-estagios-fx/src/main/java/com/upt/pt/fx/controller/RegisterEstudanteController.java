@@ -10,74 +10,95 @@ import org.json.JSONObject;
 
 public class RegisterEstudanteController {
 
-	@FXML
-	private TextField nomeField;
-	@FXML
-	private TextField emailField;
-	@FXML
-	private PasswordField passwordField;
+    @FXML
+    private TextField nomeField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
 
-	@FXML
-	private TextField cursoIdField;
-	@FXML
-	private ComboBox<CursoOption> cursoCombo;
-	@FXML
-	private TextField numeroEstudanteField;
-	@FXML
-	private TextField anoMatriculaField;
+    @FXML
+    private ComboBox<CursoOption> cursoCombo;
+    
+    @FXML
+    private TextField numeroEstudanteField;
+    @FXML
+    private TextField anoMatriculaField;
 
-	@FXML
-	private Label errorLabel;
+    @FXML
+    private Label errorLabel;
 
-	@FXML
-	public void initialize() {
-		carregarCursos();
-	}
+    @FXML
+    public void initialize() {
+        carregarCursos();
+    }
 
-	private void carregarCursos() {
-		try {
-			JSONArray arr = ApiClient.getArray("/api/cursos");
+    private void carregarCursos() {
+        try {
+            JSONArray arr = ApiClient.getArray("/api/cursos");
 
-			for (int i = 0; i < arr.length(); i++) {
-				JSONObject c = arr.getJSONObject(i);
-				cursoCombo.getItems().add(new CursoOption(c.getString("id"), c.getString("nome")));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject c = arr.getJSONObject(i);
+                // Assume que criou a classe CursoOption corretamente
+                cursoCombo.getItems().add(new CursoOption(c.getString("id"), c.getString("nome")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("Erro ao carregar cursos.");
+        }
+    }
 
-	@FXML
-	public void registar() {
-		try {
-			CursoOption curso = cursoCombo.getValue();
-			if (curso == null) {
-				errorLabel.setText("Selecione um curso");
-				return;
-			}
+    @FXML
+    public void registar() {
+        errorLabel.setText(""); // Limpar erros anteriores
 
-			JSONObject json = new JSONObject();
-			json.put("nome", nomeField.getText());
-			json.put("email", emailField.getText());
-			json.put("password", passwordField.getText());
-			json.put("tipo", "ESTUDANTE");
+        try {
+            // Validações básicas antes de enviar
+            if (nomeField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+                errorLabel.setText("Preencha os dados pessoais.");
+                return;
+            }
 
-			json.put("cursoId", cursoIdField.getText());
-			json.put("cursoId", curso.getId());
-			json.put("numeroEstudante", numeroEstudanteField.getText());
-			json.put("anoMatricula", Integer.parseInt(anoMatriculaField.getText()));
+            CursoOption curso = cursoCombo.getValue();
+            if (curso == null) {
+                errorLabel.setText("Selecione um curso.");
+                return;
+            }
 
-			ApiClient.post("/api/auth/register", json);
+            // Validar se o ano é número
+            int ano;
+            try {
+                ano = Integer.parseInt(anoMatriculaField.getText());
+            } catch (NumberFormatException e) {
+                errorLabel.setText("O ano de matrícula deve ser um número.");
+                return;
+            }
 
-			SceneManager.changeScene("login.fxml");
+            JSONObject json = new JSONObject();
+            json.put("nome", nomeField.getText());
+            json.put("email", emailField.getText());
+            json.put("password", passwordField.getText());
+            json.put("tipo", "ESTUDANTE");
 
-		} catch (Exception e) {
-			errorLabel.setText("Erro no registo do estudante!");
-		}
-	}
+            json.put("cursoId", curso.getId()); 
+            
+            json.put("numeroEstudante", numeroEstudanteField.getText());
+            json.put("anoMatricula", ano);
 
-	@FXML
-	public void voltar() {
-		SceneManager.changeScene("register.fxml");
-	}
+            // Enviar para o Backend
+            ApiClient.post("/api/auth/register", json);
+
+            // Sucesso
+            SceneManager.changeScene("login.fxml");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("Erro no registo: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void voltar() {
+        SceneManager.changeScene("register.fxml");
+    }
 }

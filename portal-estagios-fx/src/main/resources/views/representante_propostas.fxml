@@ -27,13 +27,13 @@
         <Pane HBox.hgrow="ALWAYS" /> 
         
         <Button text="🔄 Atualizar Lista" onAction="#carregar" 
-                style="-fx-cursor: hand; -fx-background-color: #ecf0f1; -fx-text-fill: #2c3e50;"/>
+                style="-fx-cursor: hand; -fx-background-color: #ecf0f1; -fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
     </HBox>
 
     <TableView fx:id="tabela" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="colId" text="ID" prefWidth="50.0" />
-            <TableColumn fx:id="colTitulo" text="Título da Oferta" prefWidth="250.0" />
+            <TableColumn fx:id="colId" text="ID" prefWidth="50.0" style="-fx-alignment: CENTER;" />
+            <TableColumn fx:id="colTitulo" text="Título da Oferta" prefWidth="300.0" />
             <TableColumn fx:id="colEstado" text="Estado" prefWidth="100.0" style="-fx-alignment: CENTER;"/>
             <TableColumn fx:id="colVagas" text="Vagas" prefWidth="80.0" style="-fx-alignment: CENTER;"/>
             <TableColumn fx:id="colDuracao" text="Duração (Meses)" prefWidth="120.0" style="-fx-alignment: CENTER;"/>
@@ -56,8 +56,18 @@
             </font>
         </Button>
 
-        <Button text="✏️ Editar Proposta Selecionada" onAction="#editar" 
+        <Button text="✏️ Editar Selecionada" onAction="#editar" 
                 style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+
+        <Button text="➕ Criar Nova" onAction="#criarNova" 
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;">
             <padding>
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>

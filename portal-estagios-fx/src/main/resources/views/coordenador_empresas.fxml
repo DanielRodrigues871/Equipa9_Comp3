@@ -25,7 +25,7 @@
     </TableView>
 
     <HBox spacing="15.0" alignment="CENTER_RIGHT">
-        <Button text="🚫 Desativar Empresa" onAction="#desativar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
-        <Button text="✅ Ativar Empresa" onAction="#ativar" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Desativar Empresa" onAction="#desativar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;"/>
+        <Button text="Ativar Empresa" onAction="#ativar" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-cursor: hand;"/>
     </HBox>
 </VBox>
